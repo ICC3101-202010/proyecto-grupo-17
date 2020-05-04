@@ -2,11 +2,14 @@
 
 namespace Proyecto
 {
-    class MainClass
+    public class Spotflix
     {
+
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
+
+
     }
 }
