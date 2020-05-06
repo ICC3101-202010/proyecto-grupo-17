@@ -20,7 +20,7 @@ namespace Proyecto
             this.Views = Views;
         }
 
-        public int Tiempo_Reproduccion()
+        public void TiempoReproduccion()
         {
 
         }

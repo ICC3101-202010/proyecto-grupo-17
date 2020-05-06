@@ -5,14 +5,14 @@ namespace Proyecto
 {
     public class Album
     {
-        string name;
-        List<Song> Song_List;
+        private string Name;
+        private List<Song> SongList;
         
 
-        public Album(string name, List<Song> Song_List)
+        public Album(string name, List<Song> songList)
         {
-            this.name = name;
-            this.Song_List = Song_List;
+            Name = name;
+            SongList = songList;
         }
     }
 }

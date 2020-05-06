@@ -1,45 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Proyecto
 {
     public class User
     {
-        public string name;
-        public string email;
-        public int password;
-        public bool private_account;
-        public List<User> followers;
-        public List<Object> following;
-        public List<Media> queue;
-        Dictionary<object, List<object>> Favorites = new Dictionary<object, List<object>>();
-        List<object> Likes = new List<object>();
-        public bool premium; 
+        private string UserName;
+        private string Email;
+        private int Password;
+        private bool PrivateAccount;   
+        private List<User> Followers;
+        private List<Object> Following;
+        private Queue<Media> Queue;
+        private Dictionary<object, List<object>> Favorites;
+        private List<object> Likes;
+        private bool Premium;
+        private List<Playlist> Playlists;
 
-        public User(string name, string email, int password, bool private_account, Dictionary<object, List<object>> Favorites, List<object> Likes, bool premium)
+        public User(string name, string email, int password, bool privateAccount, bool premium)
         {
-            this.name = name;
-            this.email = email;
-            this.password = password;
-            this.private_account = private_account;
-            this.Favorites = Favorites;
-            this.Likes = Likes;
-            this.premium = premium;
+            UserName = name;
+            Email = email;
+            Password = password;
+            PrivateAccount = privateAccount;
+            Dictionary<object, List<object>> favorites = new Dictionary<object, List<object>>();
+            List<object> likes = new List<object>();
+            Queue<Media> queue = new Queue<Media>();
+            List<Playlist> playlists = new List<Playlist>();
+            Favorites = favorites;
+            Likes = likes;
+            Queue = queue;
+            Playlists = playlists;
+            Premium = premium;
         }
 
-        public void Add_To_Queue(Media new_media)
+        public void AddToQueue(Media nextMedia)
         {
 
         }
 
-        public void Add_To_Playlist()
+        public void AddToPlaylist(Media media, Playlist plName)
         {
 
         }
 
-        public void New_Playlist()
+        public void NewPlaylist(string name)
         {
 
+            bool privateList = false;
+            if (PrivateAccount == true)
+            {
+                privateList = true;
+            }
+            Console.WriteLine("Do you want your playlist to be private? y/n");
+            int read = Console.Read();
+            if (read == 'y')
+            {
+                privateList = true;
+            }
+
+            Playlist a = new Playlist(name, privateList);
+            Playlists.Add(a);
         }
 
         public void Follow(object follow)
@@ -49,3 +71,8 @@ namespace Proyecto
 
     }
 }
+
+
+//string a = "sss.mp4";
+//_ = Process.Start(a);
+//private Process a = new Process();

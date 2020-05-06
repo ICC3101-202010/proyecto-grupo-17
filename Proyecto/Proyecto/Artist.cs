@@ -5,13 +5,13 @@ namespace Proyecto
 {
     public class Artist : Person
     {
-        List<Album> albums = new List<Album>();
-        List<Song> discography = new List<Song>();
+        private List<Album> Albums;
+        private List<Song> Songs;
 
-        public Artist(string name, List<string> professions, int age, List<Album> albums, List<Song> discography) : base(name, professions, age)
+        public Artist(string name, List<string> professions, int age, List<Album> albums, List<Song> songs) : base(name, professions, age)
         {
-            this.albums = albums;
-            this.discography = discography;
+            Albums = albums;
+            Songs = songs;
         }
     }
 }

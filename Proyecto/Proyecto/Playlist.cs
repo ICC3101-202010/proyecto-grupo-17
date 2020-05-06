@@ -5,15 +5,18 @@ namespace Proyecto
 {
     public class Playlist
     {
-        public string name;
-        bool privacy;
-        List<Media> PList;
+        private string Name;
+        private bool PrivateList;
+        private List<Media> PList;
 
-        public Playlist(string name, bool privacy, List<Media> PList)
+        public Playlist(string name, bool privateList)
         {
-            this.name = name;
-            this.privacy = privacy;
-            this.PList = PList;
+
+            Name = name;
+            List<Media> pList = new List<Media>();
+            PList = pList;
+            PrivateList = privateList;
+
         }
 
 
