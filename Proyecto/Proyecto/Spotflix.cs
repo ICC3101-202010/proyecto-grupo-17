@@ -6,6 +6,15 @@ namespace Proyecto
     public class Spotflix
     {
         private List<User> Users;
+        private Dictionary<string, List<Media>> MediaDB = new Dictionary<string, List<Media>> ();
+
+        public void MediaDBAdd()
+        {
+            List<Media> SongList = new List<Media>();
+            List<Media> FilmList = new List<Media>();
+            MediaDB.Add("Songs", SongList);
+            MediaDB.Add("Films", FilmList);
+        }
 
         public Spotflix()
         {
@@ -34,6 +43,11 @@ namespace Proyecto
                 {
                     samepass = true;
                 }
+
+                else
+                {
+                    Console.WriteLine("The password must be the same");
+                }
             }
 
             Console.WriteLine("Make account private? y/n");
@@ -47,7 +61,7 @@ namespace Proyecto
 
             bool premium = false; //Para pagar premium se hace despues?
 
-            User user = new User()
+            User user = new User();
 
 
         }
