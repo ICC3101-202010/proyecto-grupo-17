@@ -13,7 +13,7 @@ namespace Proyecto
         List<string> comments = new List<string>();
         int FPS;
 
-        public Video(Dictionary<string, List<string>> Metadata, Dictionary<string, List<string>> Information, int Users_Like, double Score, int Views, string name, string creator, double duration, string max_quality, List<string> comments, int FPS) : base(Metadata, Information, Users_Like, Score, Views)
+        public Video(Dictionary<string, List<string>> Metadata, Dictionary<string, List<string>> Information, int Users_Like, double Score, int Views, string name, string creator, double duration, string max_quality, List<string> comments, int FPS) : base(Metadata, Information)
         {
             this.name = name;
             this.creator = creator;
@@ -30,7 +30,7 @@ namespace Proyecto
 
         void Add_metadata()
         {
-            Console.WriteLine("What kind of data would you like to add?");
+            Console.WriteLine("What kind of data would you like to add?"); //Se tiene que hacer cuando se crea el objeto
             string new_Metadata = Console.ReadLine();
         }
 

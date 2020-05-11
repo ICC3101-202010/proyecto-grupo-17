@@ -18,21 +18,6 @@ namespace Proyecto
         private bool Premium;
         private List<Playlist> Playlists;
 
-        public string GetPassword()
-        {
-            return Password;
-        }
-
-        public string GetUsername()
-        {
-            return UserName;
-        }
-
-        public string GetEmail()
-        {
-            return Email;
-        }
-
         public User(string name, string email, string password, bool privateAccount, bool premium)
         {
             UserName = name;
@@ -50,32 +35,83 @@ namespace Proyecto
             Premium = premium;
         }
 
+        public string GetPassword()
+        {
+            return Password;
+        }
+
+        public string GetUsername()
+        {
+            return UserName;
+        }
+
+        public string GetEmail()
+        {
+            return Email;
+        }
+
         public void AddToQueue(Media nextMedia)
         {
-
+            Queue.Enqueue(nextMedia);
         }
 
         public void AddToPlaylist(Media media, Playlist plName)
         {
+            if (Playlists.Count == 0)
+            {
+                Console.WriteLine("You have no playlists, to create one go to new playlist.");  //placeholder
+            }
 
+            else
+            {
+                Playlist a = Playlists.Find(x => x.GetName() == plName.GetName());
+
+                if (a.GetList().Contains(media))
+                {
+                    Console.WriteLine($"Playlist already contains {0}" , media);    //placeholder
+                }
+
+                else
+                {
+
+                    a.AddMedia(media);
+                }
+            }
         }
 
-        public void NewPlaylist(string name)
+        public void LikeMedia(Media media)
         {
+            if (Likes.Contains(media))
+            {
+                media.AddLike(false);
+            }
+            else
+            {
+                media.AddLike(true);
+            }
+            
+        }
 
+        public void NewPlaylist()
+        {
+            Console.Write("Playlist name: ");
+            string name = Console.ReadLine();
             bool privateList = false;
             if (PrivateAccount == true)
             {
                 privateList = true;
             }
-            Console.WriteLine("Do you want your playlist to be private? y/n");
-            int read = Console.Read();
-            if (read == 'y')
+            else
             {
-                privateList = true;
+                Console.WriteLine("Do you want your playlist to be private? y/n");
+                int read = Console.Read();
+                if (read == 'y')
+                {
+                    privateList = true;
+                }
             }
 
-            Playlist a = new Playlist(name, privateList);
+            Playlist a = new Playlist(name, privateList, UserName);
             Playlists.Add(a);
         }
 

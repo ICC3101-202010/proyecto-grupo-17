@@ -7,7 +7,7 @@ namespace Proyecto
     public static class Spotflix
     {
         private static Dictionary<string, User> UserDB = new Dictionary<string, User>();
-        private static Dictionary<string, List<Media>> MediaDB = new Dictionary<string, List<Media>>();
+        private static List<Media> MediaDB = new List<Media>();
 
         static Spotflix()
         {
@@ -19,13 +19,15 @@ namespace Proyecto
             return UserDB;
         }
 
-        public static void MediaDBAdd()
+        public static void ImportMedia(Media media)
         {
-            List<Media> SongList = new List<Media>();
-            List<Media> FilmList = new List<Media>();
-            MediaDB.Add("Songs", SongList);
-            MediaDB.Add("Films", FilmList);
+
+            Media a = new Media();
+
+            MediaDB.Add(media);
         }
+
+
 
 
 
