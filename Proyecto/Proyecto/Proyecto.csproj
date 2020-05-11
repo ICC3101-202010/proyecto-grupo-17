@@ -48,6 +48,8 @@
     <Compile Include="Spotflix.cs" />
     <Compile Include="RegexUtilities.cs" />
     <Compile Include="SongMetadata.cs" />
+    <Compile Include="VideoMetadata.cs" />
+    <Compile Include="Filter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

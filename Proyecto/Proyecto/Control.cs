@@ -15,7 +15,7 @@ namespace Proyecto
             Console.WriteLine("What are you looking for?");
             Console.WriteLine("a) A song");
             Console.WriteLine("b) A film");
-            Console.WriteLine("c) Both")
+            Console.WriteLine("c) Both");
             Console.WriteLine("Type A, B or C");
             string ans = Console.ReadLine();
 
@@ -61,11 +61,36 @@ namespace Proyecto
                         SongMetadata SMD = s.GetMetadata;
                         string n1 = SMD.Artist1.Name;
 
-                        if (a1 == ArtistName)
+                        if (n1 == ArtistName)
                         {
-                            searchRes.Add(a1);
+                            searchRes.Add(s);
                         }
                     }
+                }
+
+                else if (ans == "C" || ans == "c")
+                {
+                    Console.WriteLine("Type the name of the album");
+                    string AlbumName = Console.ReadLine();
+
+                    List<Song> SFSongs = Spotflix.GetSongDB;
+
+                    foreach (Song s in SFSongs)
+                    {
+                        SongMetadata SMD = s.GetMetadata;
+                        string n1 = SMD.Album;
+
+                        if (n1 == AlbumName)
+                        {
+                            searchRes.Add(s);
+                        }
+                    }
+                }
+
+
+                else
+                {
+                    Console.WriteLine("Invalid answer");
                 }
 
 
@@ -89,6 +114,17 @@ namespace Proyecto
                 Console.WriteLine("What film element are you looking for?");
                 Console.WriteLine("a) Name");
                 Console.WriteLine("b) Director");
+                Console.WriteLine("Type A or B");
+                ans = Console.ReadLine();
+
+                if (ans == "A" || ans == "a")
+                {
+                    Console.WriteLine("Type the name of the video");
+                    string vidName = Console.ReadLine();
+
+                    List<Video> SDB = Spotflix.GetVideoDB;
+                    SDB.
+                }
             }
 
 

@@ -5,13 +5,20 @@ namespace Proyecto
 {
     public class Song : Media
     {
-        string artist;
-        string album;
+        //Dictionary<string, SongMetadata> Metadata = new Dictionary<string, SongMetadata>();
+        private SongMetadata s1;
 
-        public Song(Dictionary<string, List<string>> Metadata, Dictionary<string, List<string>> Information, string artist, string album) : base(Metadata, Information)
+        public Song(Dictionary<string, List<string>> Information, SongMetadata metadata) : base(Information)
         {
-            this.artist = artist;
-            this.album = album;
+            metadata = s1;
+        }
+
+        public SongMetadata GetMetadata
+        {
+            get
+            {
+                return s1;
+            }
         }
     }
 }

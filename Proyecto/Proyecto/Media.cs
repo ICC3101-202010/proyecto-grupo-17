@@ -6,7 +6,6 @@ namespace Proyecto
 {
     public class Media
     {
-        protected Dictionary<string, List<string>> Metadata = new Dictionary<string, List<string>>();
         protected Dictionary<string, List<string>> Information = new Dictionary<string, List<string>>();
         protected int UsersLike;
         protected double Score;
@@ -14,14 +13,22 @@ namespace Proyecto
         protected string FileName;
 
 
-        public Media(Dictionary<string, List<string>> Metadata, Dictionary<string, List<string>> Information)
+        public Media(Dictionary<string, List<string>> Information)
         {
-            this.Metadata = Metadata;
             this.Information = Information;
             UsersLike = 0;
             Score = 0;
             Views = 0;
         }
+
+        public void MetadataInfo()
+        {
+
+        }
+
+
+
+
 
         public void TiempoReproduccion()
         {

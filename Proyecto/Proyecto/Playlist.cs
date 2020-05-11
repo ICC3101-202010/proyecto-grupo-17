@@ -8,9 +8,9 @@ namespace Proyecto
         private string Name;
         private bool PrivateList;
         private List<Media> PList;
-        private string CreatedBy;
+        private User CreatedBy;
 
-        public Playlist(string name, bool privateList, string createdBy)
+        public Playlist(string name, bool privateList, User createdBy)
         {
 
             Name = name;
