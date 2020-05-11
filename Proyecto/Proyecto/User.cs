@@ -8,7 +8,7 @@ namespace Proyecto
     {
         private string UserName;
         private string Email;
-        private int Password;
+        private string Password;
         private bool PrivateAccount;   
         private List<User> Followers;
         private List<Object> Following;
@@ -18,7 +18,15 @@ namespace Proyecto
         private bool Premium;
         private List<Playlist> Playlists;
 
-        public User(string name, string email, int password, bool privateAccount, bool premium)
+        public string GetPassword
+        {
+            get
+            {
+                return Password;
+            }
+        }
+
+        public User(string name, string email, string password, bool privateAccount, bool premium)
         {
             UserName = name;
             Email = email;

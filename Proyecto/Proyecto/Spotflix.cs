@@ -5,8 +5,16 @@ namespace Proyecto
 {
     public class Spotflix
     {
-        private List<User> Users;
-        private Dictionary<string, List<Media>> MediaDB = new Dictionary<string, List<Media>> ();
+        private Dictionary<string, User> UserDB = new Dictionary<string, User>();
+        private Dictionary<string, List<Media>> MediaDB = new Dictionary<string, List<Media>>();
+
+        public Dictionary<string, User> GetUserDB
+        {
+            get
+            {
+                return UserDB;
+            }
+        }
 
         public void MediaDBAdd()
         {
@@ -19,6 +27,8 @@ namespace Proyecto
         public Spotflix()
         {
         }
+
+
 
 
         public void Register()
