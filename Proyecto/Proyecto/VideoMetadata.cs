@@ -5,17 +5,21 @@ namespace Proyecto
 {
     public class VideoMetadata
     {
-        string Gender;
-        string Category;
-        List<Person> Actors;
-        Person Director;
-        string Studio;
-        int PubYear;
-        string Description;
-        double Score;
+        public string Name;
+        public string Creator;
+        public string Gender;
+        public string Category;
+        public List<Person> Actors;
+        public Person Director;
+        public string Studio;
+        public int PubYear;
+        public string Description;
+        public double Score;
 
-        public VideoMetadata(string gender, string category, List<Person> actors, Person director, string studio, int pubYear, string description, double score)
+        public VideoMetadata(string name, string creator, string gender, string category, List<Person> actors, Person director, string studio, int pubYear, string description, double score)
         {
+            Name = name;
+            Creator = creator;
             Gender = gender;
             Category = category;
             Actors = actors;

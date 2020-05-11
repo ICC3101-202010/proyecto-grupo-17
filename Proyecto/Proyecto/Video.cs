@@ -6,8 +6,6 @@ namespace Proyecto
     public class Video : Media
     {
 
-        string name;
-        string creator;
         double duration;
         string max_quality;
         List<string> comments = new List<string>();
@@ -16,13 +14,19 @@ namespace Proyecto
 
         public Video(Dictionary<string, List<string>> Information, VideoMetadata Metadata, int Users_Like, double Score, int Views, string name, string creator, double duration, string max_quality, List<string> comments, int FPS) : base(Information)
         {
-            this.name = name;
-            this.creator = creator;
             this.duration = duration;
             this.max_quality = max_quality;
             this.comments = comments;
             this.FPS = FPS;
             this.Metadata = Metadata;
+        }
+
+        public VideoMetadata GetMetadata
+        {
+            get
+            {
+                return Metadata;
+            }
         }
 
         void Download()

@@ -11,27 +11,75 @@ namespace Proyecto
 
         public void filter(string a)
         {
-            List<object> FilterList = new List<object>();
-
-            if (a == "Song" || a == "song")
-            {
-                string
-                a1 = SongMetadata.Name;
-            }
+            
         }
 
 
 
-        public void Search(string a)
+        public List<Object> Search(string a)
         {
+            List<object> SearchResults = new List<object>();
+
             List<Song> SFSongs = Spotflix.GetSongDB;
+            List<Song> SongResults = new List<Song>();
 
             foreach(Song s in SFSongs)
             {
+                List<string> Options = new List<string>();
+                string o1 = s.GetMetadata.Name;
+                string o2 = s.GetMetadata.Artist1.Name;
+                string o3 = s.GetMetadata.Album;
+                string o4 = s.GetMetadata.Gender;
+
+                Options.Add(o1);
+                Options.Add(o2);
+                Options.Add(o3);
+                Options.Add(o4);
+
+                foreach (string i in Options)
+                {
+                    if (i == a)
+                    {
+                        SongResults.Add(s);
+                    }
+                }
+            }
+
+            SearchResults.Add(SongResults);
+
+
+            List<Video> SFVideos = Spotflix.GetVideoDB;
+            List<Video> VidResults = new List<Video>();
+
+            foreach(Video v in SFVideos)
+            {
+                List<string> Options2 = new List<string>();
+
+                string o1 = v.GetMetadata.Name;
+                string o2 = v.GetMetadata.Creator;
+                string o3 = v.GetMetadata.Gender;
+                string o4 = v.GetMetadata.Category;
+                string o5 = v.GetMetadata.Studio;
+
+                Options2.Add(o1);
+                Options2.Add(o2);
+                Options2.Add(o3);
+                Options2.Add(o4);
+                Options2.Add(o5);
+
+                foreach (string i in Options2)
+                {
+                    if (i == a)
+                    {
+                        VidResults.Add(v);
+                    }
+                }
 
             }
 
+            SearchResults.Add(VidResults);
 
+            return SearchResults;
         }
 
     }
@@ -170,9 +218,3 @@ namespace Proyecto
 
         }
         */
-        public void Search()
-        {
-
-        }
-    }
-}
