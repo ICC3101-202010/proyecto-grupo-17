@@ -11,7 +11,7 @@ namespace Proyecto
         Person Director;
         string Studio;
         int PubYear;
-        string Descrption;
+        string Description;
         double Score;
 
         public VideoMetadata(string gender, string category, List<Person> actors, Person director, string studio, int pubYear, string description, double score)
@@ -22,7 +22,7 @@ namespace Proyecto
             Director = director;
             Studio = studio;
             PubYear = pubYear;
-            Descrption = description;
+            Description = description;
             Score = score;
         }
     }
