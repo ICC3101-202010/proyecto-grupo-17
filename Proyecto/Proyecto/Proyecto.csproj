@@ -46,6 +46,7 @@
     <Compile Include="Album.cs" />
     <Compile Include="Artist.cs" />
     <Compile Include="Spotflix.cs" />
+    <Compile Include="RegexUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

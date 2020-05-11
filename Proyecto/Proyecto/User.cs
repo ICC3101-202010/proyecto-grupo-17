@@ -18,12 +18,19 @@ namespace Proyecto
         private bool Premium;
         private List<Playlist> Playlists;
 
-        public string GetPassword
+        public string GetPassword()
         {
-            get
-            {
-                return Password;
-            }
+            return Password;
+        }
+
+        public string GetUsername()
+        {
+            return UserName;
+        }
+
+        public string GetEmail()
+        {
+            return Email;
         }
 
         public User(string name, string email, string password, bool privateAccount, bool premium)

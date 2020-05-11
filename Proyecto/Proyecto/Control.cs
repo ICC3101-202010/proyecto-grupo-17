@@ -40,7 +40,7 @@ namespace Proyecto
             Console.WriteLine("a) Song name/artist/album/film name/film director");
             Console.WriteLine("b) Artist");
             Console.WriteLine("c) Album");
-            Console.WriteLine("d) ")
+            Console.WriteLine("d) ");
 
             string searchObject = Console.ReadLine();
             List<Media> SearchResults = new List<Media>();
@@ -51,7 +51,7 @@ namespace Proyecto
         {
             if (a == "song name")
             {
-                MediaDB
+                
             }
         }
 

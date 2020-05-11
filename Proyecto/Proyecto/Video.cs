@@ -36,7 +36,7 @@ namespace Proyecto
 
         void Add_info()
         {
-            Console.WriteLine("What kind of new info would you like to add?")
+            Console.WriteLine("What kind of new info would you like to add?");
         }
 
         void Add_image()
