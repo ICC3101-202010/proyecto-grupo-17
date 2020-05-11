@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Proyecto
 {
+    [Serializable]
     public static class Spotflix
     {
         private static Dictionary<string, User> UserDB = new Dictionary<string, User>();

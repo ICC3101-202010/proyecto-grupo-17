@@ -10,7 +10,7 @@ namespace Proyecto
 
         public static void Main(string[] args)
         {
-            /*Console.WriteLine("Hello, and welcome to Spotflix!");
+            Console.WriteLine("Hello, and welcome to Spotflix!");
             Console.WriteLine("Are you a new user or a returning one? new/returning");
             string ans = Console.ReadLine();
 
@@ -62,29 +62,6 @@ namespace Proyecto
                     Console.WriteLine("User not found");
                 }
 
-            }*/
-            while (true)
-            {
-                Console.WriteLine("1,2,0");
-                int op = Console.Read();
-                Console.WriteLine();
-                if (op == '1')
-                {
-                    Spotflix.Register();
-                }
-                else if (op == '2')
-                {
-                    foreach (User item in Spotflix.GetUserDB().Values)
-                    {
-                        Console.WriteLine(item.GetUsername());
-                        Console.WriteLine(item.GetEmail());
-                    }
-                    
-                }
-                else if (op == '0')
-                {
-                    break;
-                }
             }
 
         }
