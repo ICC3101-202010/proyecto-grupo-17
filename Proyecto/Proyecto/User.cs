@@ -111,7 +111,11 @@ namespace Proyecto
                 }
             }
 
+<<<<<<< HEAD
             //Playlist a = new Playlist(name, privateList, UserName);
+=======
+            //Playlist a = new Playlist(name, privateList, this.User);
+>>>>>>> 01aef45e0c14ac2fee2912a6cad058688d0310fb
             //Playlists.Add(a);
         }
 

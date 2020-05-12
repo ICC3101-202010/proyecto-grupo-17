@@ -22,6 +22,7 @@ namespace Proyecto
                 bool proof = false;
                 List<string> Options = new List<string>();
 
+
                 if (filters.Contains(1) == true)
                 {
                     string o1 = s.GetMetadata.Name;
@@ -45,6 +46,17 @@ namespace Proyecto
                     string o4 = s.GetMetadata.Genre;
                     Options.Add(o4);
                 }
+
+                string o1 = s.GetMetadata.Name;
+                string o2 = s.GetMetadata.Artist1.Name;
+                string o3 = s.GetMetadata.Album;
+                string o4 = s.GetMetadata.Gender;
+
+                Options.Add(o1);
+                Options.Add(o2);
+                Options.Add(o3);
+                Options.Add(o4);
+
 
                 foreach (string i in Options)
                 {

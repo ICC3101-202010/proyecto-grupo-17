@@ -146,11 +146,12 @@ namespace Proyecto
             {
 
                 Console.Write("Password: ");
-                password = Console.ReadLine();
+                password = RegexUtilities.HidePassword();
+                Console.WriteLine();
                 // Agregar requerimientos de contraseña?                                                                 
                 Console.Write("Confirm password: ");
-                string password2 = Console.ReadLine();
-
+                string password2 = RegexUtilities.HidePassword();
+                Console.WriteLine();
                 if (password == password2)
                 {
                     samepass = true;
@@ -192,9 +193,13 @@ namespace Proyecto
 
         }
 
-        public static void Load()
+        public static void LogIn()
         {
-
+            Console.WriteLine("Welcome!");
+            Console.Write("Username: ");
+            string username = Console.ReadLine();
+            Console.Write("Password: ");
+            string password = Console.ReadLine();
         }
     }
 }
