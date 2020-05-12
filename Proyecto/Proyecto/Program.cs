@@ -78,7 +78,7 @@ namespace Proyecto
                                 {
                                     Console.WriteLine("Filter:");
 
-                                    nt f1 = Convert.ToInt32(Console.ReadLine());
+                                    int f1 = Convert.ToInt32(Console.ReadLine());
                                     FilterList.Add(f1);
 
                                     Console.WriteLine("Do you wish to add another filter? y/n");
