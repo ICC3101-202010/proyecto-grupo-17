@@ -58,6 +58,16 @@ namespace Proyecto
             return Playlists;
         }
 
+        public List<User> GetFollowers()
+        {
+            return Followers;
+        }
+
+        public List<object> GetFollowing()
+        {
+            return Following;
+        }
+
         public void AddToQueue(Media nextMedia)
         {
             Queue.Enqueue(nextMedia);

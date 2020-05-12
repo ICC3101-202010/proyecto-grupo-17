@@ -39,7 +39,7 @@ namespace Proyecto
                         Console.WriteLine("What do you want to do?");
                         Console.WriteLine("a) Search for music or videos");
                         Console.WriteLine("b) Go to playlists");
-                        Console.WriteLine("c) Create a new playlist");
+                        Console.WriteLine("c) Look for other profiles");
                         Console.WriteLine("d) Exit");
 
                         string Ans = Console.ReadLine();
@@ -142,11 +142,54 @@ namespace Proyecto
 
                             else if(a1 == "B" || a1 == "b")
                             {
-
+                                u.NewPlaylist();
                             }
-                            
+
+                            else
+                            {
+                                Console.WriteLine("Invalid answer");
+                            }
+
                         }
 
+                        else if (Ans == "C" || Ans == "c")
+                        {
+                            Console.WriteLine("Please state the name of the user you are looking for");
+                            string userSearch = Console.ReadLine();
+                            User u2 = Spotflix.GetUserDB[userSearch];
+
+                            try
+                            {
+                                u2 = Spotflix.GetUserDB[userSearch];
+                                
+                            }
+
+                            catch(Exception e)
+                            {
+                                Console.WriteLine("User not found");
+                                Console.WriteLine(e.Message);
+                            }
+
+
+                            Console.WriteLine("Here's the public info in the account");
+                            Console.WriteLine(" ");
+
+                            Console.WriteLine("Account name: ");
+                            Console.Write(u2.GetUsername());
+                            Console.WriteLine(" ");
+
+                            Console.WriteLine("List of playlists: ");
+                            Console.Write(u2.GetPlaylist());
+                            Console.WriteLine(" ");
+
+                            Console.WriteLine("List of people who follow this account: ");
+                            Console.Write(u2.GetFollowers());
+                            Console.WriteLine(" ");
+
+                            Console.WriteLine("List of people that this account follows: ");
+                            Console.WriteLine(u2.GetFollowing());
+                            Console.WriteLine(" ");
+                        }
 
                     }
 
