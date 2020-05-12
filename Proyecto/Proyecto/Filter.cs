@@ -9,14 +9,125 @@ namespace Proyecto
         {
         }
 
-        public void filter(string a)
+        public List<object> Filtered_Search(List<int> filters, string a)
         {
-            
+            List<object> FilteredRes = new List<object>();
+
+
+            List<Song> SFSongs = Spotflix.GetSongDB;
+            List<Song> SongResults = new List<Song>();
+
+            foreach (Song s in SFSongs)
+            {
+                bool proof = false;
+                List<string> Options = new List<string>();
+
+                if (filters.Contains(1) == true)
+                {
+                    string o1 = s.GetMetadata.Name;
+                    Options.Add(o1);
+                }
+
+                if (filters.Contains(2) == true)
+                {
+                    string o2 = s.GetMetadata.Artist1.Name;
+                    Options.Add(o2);
+                }
+
+                if (filters.Contains(3) == true)
+                {
+                    string o3 = s.GetMetadata.Album;
+                    Options.Add(o3);
+                }
+
+                if (filters.Contains(4) == true)
+                {
+                    string o4 = s.GetMetadata.Gender;
+                    Options.Add(o4);
+                }
+
+                foreach (string i in Options)
+                {
+                    if (proof == false)
+                    {
+                        if (i == a)
+                        {
+                            SongResults.Add(s);
+                            proof = true;
+                        }
+                    }
+                }
+            }
+
+            FilteredRes.Add(SongResults);
+
+
+            List<Video> SFVideos = Spotflix.GetVideoDB;
+            List<Video> VidResults = new List<Video>();
+
+            foreach (Video v in SFVideos)
+            {
+                bool proof = false;
+                List<string> Options2 = new List<string>();
+
+                if (filters.Contains(5) == true)
+                {
+                    string o1 = v.GetMetadata.Name;
+                    Options2.Add(o1);
+                }
+
+                if (filters.Contains(6) == true)
+                {
+                    string o2 = v.GetMetadata.Creator;
+                    Options2.Add(o2);
+                }
+
+                if (filters.Contains(7) == true)
+                {
+                    string o3 = v.GetMetadata.Gender;
+                    Options2.Add(o3);
+                }
+
+                if (filters.Contains(8) == true)
+                {
+                    string o4 = v.GetMetadata.Category;
+                    Options2.Add(o4);
+                }
+
+                if (filters.Contains(9) == true)
+                {
+                    string o5 = v.GetMetadata.Name;
+                    Options2.Add(o5);
+                }
+
+
+                foreach (string i in Options2)
+                {
+                    if (proof == false)
+                    {
+                        if (i == a)
+                        {
+                            VidResults.Add(v);
+                            proof = true;
+                        }
+                    }
+
+                }
+
+            }
+
+            FilteredRes.Add(VidResults);
+
+            return FilteredRes;
         }
 
 
 
-        public List<Object> Search(string a)
+
+
+
+
+        public List<object> Search(string a)
         {
             List<object> SearchResults = new List<object>();
 
@@ -25,6 +136,7 @@ namespace Proyecto
 
             foreach(Song s in SFSongs)
             {
+                bool proof = false;
                 List<string> Options = new List<string>();
                 string o1 = s.GetMetadata.Name;
                 string o2 = s.GetMetadata.Artist1.Name;
@@ -38,9 +150,13 @@ namespace Proyecto
 
                 foreach (string i in Options)
                 {
-                    if (i == a)
+                    if (proof == false)
                     {
-                        SongResults.Add(s);
+                        if (i == a)
+                        {
+                            SongResults.Add(s);
+                            proof = true;
+                        }
                     }
                 }
             }
@@ -53,6 +169,7 @@ namespace Proyecto
 
             foreach(Video v in SFVideos)
             {
+                bool proof = false;
                 List<string> Options2 = new List<string>();
 
                 string o1 = v.GetMetadata.Name;
@@ -69,10 +186,15 @@ namespace Proyecto
 
                 foreach (string i in Options2)
                 {
-                    if (i == a)
+                    if (proof == false)
                     {
-                        VidResults.Add(v);
+                        if (i == a)
+                        {
+                            VidResults.Add(v);
+                            proof = true;
+                        }
                     }
+                    
                 }
 
             }
@@ -85,136 +207,3 @@ namespace Proyecto
     }
 
 }
-
-    /*Console.WriteLine("What are you looking for?");
-            Console.WriteLine("a) A song");
-            Console.WriteLine("b) A film");
-            Console.WriteLine("c) Both");
-            Console.WriteLine("Type A, B or C");
-            string ans = Console.ReadLine();
-
-
-            if (ans == "A" || ans == "a")
-            {
-                Console.WriteLine("What song element are you looking for?");
-                Console.WriteLine("a) Name");
-                Console.WriteLine("b) Artist");
-                Console.WriteLine("c) Album");
-                ans = Console.ReadLine();
-
-                List<Song> searchRes = new List<Song>();
-
-                if (ans == "A" || ans == "a")
-                {
-                    Console.WriteLine("Type the name of the song");
-                    string SongName = Console.ReadLine();
-
-                    List<Song> SFSongs = Spotflix.GetSongDB;
-
-                    foreach (Song s in SFSongs)
-                    {
-                        SongMetadata SMD = s.GetMetadata;
-                        string n1 = SMD.Name;
-
-                        if (n1 == SongName)
-                        {
-                            searchRes.Add(s);
-                        }
-                    }
-                }
-
-                else if (ans == "B" || ans == "b")
-                {
-                    Console.WriteLine("Type the name of the song artist");
-                    string ArtistName = Console.ReadLine();
-
-                    List<Song> SFSongs = Spotflix.GetSongDB;
-
-                    foreach (Song s in SFSongs)
-                    {
-                        SongMetadata SMD = s.GetMetadata;
-                        string n1 = SMD.Artist1.Name;
-
-                        if (n1 == ArtistName)
-                        {
-                            searchRes.Add(s);
-                        }
-                    }
-                }
-
-                else if (ans == "C" || ans == "c")
-                {
-                    Console.WriteLine("Type the name of the album");
-                    string AlbumName = Console.ReadLine();
-
-                    List<Song> SFSongs = Spotflix.GetSongDB;
-
-                    foreach (Song s in SFSongs)
-                    {
-                        SongMetadata SMD = s.GetMetadata;
-                        string n1 = SMD.Album;
-
-                        if (n1 == AlbumName)
-                        {
-                            searchRes.Add(s);
-                        }
-                    }
-                }
-
-
-                else
-                {
-                    Console.WriteLine("Invalid answer");
-                }
-
-
-                int results = searchRes.Count;
-                if (results == 0)
-                {
-                    Console.WriteLine("No results found!");
-                }
-
-                else
-                {
-                    Console.WriteLine(searchRes);
-                }
-
-
-            }
-
-
-            else if (ans == "B" || ans == "b")
-            {
-                Console.WriteLine("What film element are you looking for?");
-                Console.WriteLine("a) Name");
-                Console.WriteLine("b) Director");
-                Console.WriteLine("Type A or B");
-                ans = Console.ReadLine();
-
-                if (ans == "A" || ans == "a")
-                {
-                    Console.WriteLine("Type the name of the video");
-                    string vidName = Console.ReadLine();
-
-                    List<Video> SDB = Spotflix.GetVideoDB;
-                    SDB.
-                }
-            }
-
-
-            else
-            {
-                Console.WriteLine("Invalid answer");
-            }
-
-
-            Console.WriteLine("a) Song name/artist/album/film name/film director");
-            Console.WriteLine("b) Artist");
-            Console.WriteLine("c) Album");
-            Console.WriteLine("d) ");
-
-            string searchObject = Console.ReadLine();
-            List<Media> SearchResults = new List<Media>();
-
-        }
-        */
