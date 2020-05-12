@@ -10,6 +10,7 @@ namespace Proyecto
 
         public static void Main(string[] args)
         {
+            
             Console.WriteLine("Hello, and welcome to Spotflix!");
             Console.WriteLine("Are you a new user or a returning one? new/returning");
             string ans = Console.ReadLine();
@@ -36,7 +37,7 @@ namespace Proyecto
                     if (userData.GetPassword() == passW)
                     {
                         Console.WriteLine("What do you want to do?");
-                        Console.WriteLine("a) Search for music or films");
+                        Console.WriteLine("a) Search for music or videos");
                         Console.WriteLine("b) Access your playlists");
                         Console.WriteLine("c) Create a new playlist");
                         Console.WriteLine("d) Exit");
@@ -45,7 +46,80 @@ namespace Proyecto
 
                         if (Ans == "a")
                         {
+                            Console.WriteLine("Please write the name of the song or video that you are looking for");
+                            string search = Console.ReadLine();
 
+                            Console.WriteLine("Do you wish to apply any filters? y/n");
+                            string a = Console.ReadLine();
+
+                            if (a == "y")
+                            {
+                                Console.WriteLine("Please choose one or more of the following filters:");
+                                Console.WriteLine("For songs:");
+                                Console.WriteLine("1) Name");
+                                Console.WriteLine("2) Artist");
+                                Console.WriteLine("3) Album");
+                                Console.WriteLine("4) Genre");
+                                Console.WriteLine("");
+                                Console.WriteLine("For videos:");
+                                Console.WriteLine("5) Name");
+                                Console.WriteLine("6) Creator");
+                                Console.WriteLine("7) Genre");
+                                Console.WriteLine("8) Category");
+                                Console.WriteLine("9) Director");
+                                Console.WriteLine("10) Studio");
+
+                                Console.WriteLine("Please type the numbers next to the desired filters");
+                                List<int> FilterList = new List<int>();
+
+                                string b1 = "y";
+
+                                while (b1 == "y")
+                                {
+                                    Console.WriteLine("Filter:");
+
+                                    nt f1 = Convert.ToInt32(Console.ReadLine());
+                                    FilterList.Add(f1);
+
+                                    Console.WriteLine("Do you wish to add another filter? y/n");
+                                    b1 = Console.ReadLine();
+
+                                    if (FilterList.Count >= 9) //Security measure, so that nobody can write filters forever.
+                                    {
+                                        b1 = "n";
+                                    }
+                                }
+
+                                Filter f2 = new Filter();
+
+                                foreach(object o in f2.FilteredSearch(FilterList, a))
+                                {
+                                    Console.WriteLine(o);
+                                }
+                            }
+
+
+                            else if (a == "n")
+                            {
+                                Filter f2 = new Filter();
+
+                                foreach(object o in f2.Search(a))
+                                {
+                                    Console.WriteLine(o);
+                                }
+                            }
+
+
+                            Console.WriteLine("What do you want to search for?");
+                            string a1 = Console.ReadLine();
+
+                            Filter f = new Filter();
+                            List<object> filtered = f.Search(a1);
+
+                            foreach (object o in filtered)
+                            {
+                                Console.WriteLine(o);
+                            }
                         }
                     }
 
@@ -63,6 +137,7 @@ namespace Proyecto
                 }
 
             }
+
 
         }
 

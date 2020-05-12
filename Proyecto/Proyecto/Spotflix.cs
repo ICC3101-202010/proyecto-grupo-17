@@ -46,7 +46,7 @@ namespace Proyecto
         public static void ImportMedia(Media media)
         {
 
-            Media a = new Media();
+            //Media a = new Media();
 
             MediaDB.Add(media);
         }

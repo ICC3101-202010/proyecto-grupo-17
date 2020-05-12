@@ -111,8 +111,8 @@ namespace Proyecto
                 }
             }
 
-            Playlist a = new Playlist(name, privateList, UserName);
-            Playlists.Add(a);
+            //Playlist a = new Playlist(name, privateList, UserName);
+            //Playlists.Add(a);
         }
 
         public void Follow(object follow)

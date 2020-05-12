@@ -9,7 +9,7 @@ namespace Proyecto
         {
         }
 
-        public List<object> Filtered_Search(List<int> filters, string a)
+        public List<object> FilteredSearch(List<int> filters, string a)
         {
             List<object> FilteredRes = new List<object>();
 
@@ -42,7 +42,7 @@ namespace Proyecto
 
                 if (filters.Contains(4) == true)
                 {
-                    string o4 = s.GetMetadata.Gender;
+                    string o4 = s.GetMetadata.Genre;
                     Options.Add(o4);
                 }
 
@@ -84,7 +84,7 @@ namespace Proyecto
 
                 if (filters.Contains(7) == true)
                 {
-                    string o3 = v.GetMetadata.Gender;
+                    string o3 = v.GetMetadata.Genre;
                     Options2.Add(o3);
                 }
 
@@ -96,8 +96,14 @@ namespace Proyecto
 
                 if (filters.Contains(9) == true)
                 {
-                    string o5 = v.GetMetadata.Name;
+                    string o5 = v.GetMetadata.Director.Name;
                     Options2.Add(o5);
+                }
+
+                if (filters.Contains(10) == true)
+                {
+                    string o6 = v.GetMetadata.Studio;
+                    Options2.Add(o6);
                 }
 
 
@@ -130,6 +136,7 @@ namespace Proyecto
         public List<object> Search(string a)
         {
             List<object> SearchResults = new List<object>();
+            int number = 0;
 
             List<Song> SFSongs = Spotflix.GetSongDB;
             List<Song> SongResults = new List<Song>();
@@ -141,7 +148,7 @@ namespace Proyecto
                 string o1 = s.GetMetadata.Name;
                 string o2 = s.GetMetadata.Artist1.Name;
                 string o3 = s.GetMetadata.Album;
-                string o4 = s.GetMetadata.Gender;
+                string o4 = s.GetMetadata.Genre;
 
                 Options.Add(o1);
                 Options.Add(o2);
@@ -156,6 +163,7 @@ namespace Proyecto
                         {
                             SongResults.Add(s);
                             proof = true;
+                            number = 1;
                         }
                     }
                 }
@@ -174,15 +182,17 @@ namespace Proyecto
 
                 string o1 = v.GetMetadata.Name;
                 string o2 = v.GetMetadata.Creator;
-                string o3 = v.GetMetadata.Gender;
+                string o3 = v.GetMetadata.Genre;
                 string o4 = v.GetMetadata.Category;
-                string o5 = v.GetMetadata.Studio;
+                string o5 = v.GetMetadata.Director.Name;
+                string o6 = v.GetMetadata.Studio;
 
                 Options2.Add(o1);
                 Options2.Add(o2);
                 Options2.Add(o3);
                 Options2.Add(o4);
                 Options2.Add(o5);
+                Options2.Add(o6);
 
                 foreach (string i in Options2)
                 {
@@ -200,6 +210,11 @@ namespace Proyecto
             }
 
             SearchResults.Add(VidResults);
+
+            if (number == 0)
+            {
+                Console.WriteLine("Your search has returned no results");
+            }
 
             return SearchResults;
         }

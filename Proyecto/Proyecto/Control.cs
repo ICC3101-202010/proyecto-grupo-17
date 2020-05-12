@@ -8,16 +8,9 @@ namespace Proyecto
         public Control()
         {
 
-        }
+            
 
-        
 
-        public void Filter(string a)
-        {
-            if (a == "song name")
-            {
-                
-            }
         }
 
     }
