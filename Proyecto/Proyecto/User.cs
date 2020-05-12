@@ -6,6 +6,9 @@ namespace Proyecto
 {
     public class User
     {
+        private Dictionary<string, List<object>> UserDict;
+
+        private List<object> UserData;
         private string UserName;
         private string Email;
         private string Password;
@@ -48,6 +51,11 @@ namespace Proyecto
         public string GetEmail()
         {
             return Email;
+        }
+
+        public List<Playlist> GetPlaylist()
+        {
+            return Playlists;
         }
 
         public void AddToQueue(Media nextMedia)
@@ -111,12 +119,8 @@ namespace Proyecto
                 }
             }
 
-<<<<<<< HEAD
-            //Playlist a = new Playlist(name, privateList, UserName);
-=======
-            //Playlist a = new Playlist(name, privateList, this.User);
->>>>>>> 01aef45e0c14ac2fee2912a6cad058688d0310fb
-            //Playlists.Add(a);
+            Playlist a = new Playlist(name, privateList, Spotflix.GetUserDB[UserName]);
+            Playlists.Add(a);
         }
 
         public void Follow(object follow)

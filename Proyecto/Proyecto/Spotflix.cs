@@ -17,6 +17,7 @@ namespace Proyecto
             //{"Videos", VideoDB}
         //};
 
+
         public static List<Song> GetSongDB
         {
             get
@@ -38,9 +39,12 @@ namespace Proyecto
 
         }
 
-        public static Dictionary<string, User> GetUserDB()
+        public static Dictionary<string, User> GetUserDB
         {
-            return UserDB;
+            get
+            {
+                return UserDB;
+            }
         }
 
         public static void ImportMedia(Media media)

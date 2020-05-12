@@ -30,15 +30,15 @@ namespace Proyecto
 
                 
 
-                if (Spotflix.GetUserDB().ContainsKey(userN) == true)
+                if (Spotflix.GetUserDB.ContainsKey(userN) == true)
                 {
-                    User userData = Spotflix.GetUserDB()[userN];
+                    User userData = Spotflix.GetUserDB[userN];
 
                     if (userData.GetPassword() == passW)
                     {
                         Console.WriteLine("What do you want to do?");
                         Console.WriteLine("a) Search for music or videos");
-                        Console.WriteLine("b) Access your playlists");
+                        Console.WriteLine("b) Go to playlists");
                         Console.WriteLine("c) Create a new playlist");
                         Console.WriteLine("d) Exit");
 
@@ -121,6 +121,33 @@ namespace Proyecto
                                 Console.WriteLine(o);
                             }
                         }
+
+
+                        else if (Ans == "B" || Ans == "b")
+                        {
+                            User u = Spotflix.GetUserDB[userN];
+                            Console.WriteLine("Do you wish to:");
+                            Console.WriteLine("A) Access your existing playlists?");
+                            Console.WriteLine("B) Create a new one?");
+                            string a1 = Console.ReadLine();
+
+                            if (a1 == "A" || a1 == "a")
+                            {
+                                foreach(Playlist p in u.GetPlaylist())
+                                {
+                                    Console.WriteLine(p);
+                                }
+                                
+                            }
+
+                            else if(a1 == "B" || a1 == "b")
+                            {
+
+                            }
+                            
+                        }
+
+
                     }
 
 
