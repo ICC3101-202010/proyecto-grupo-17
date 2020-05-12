@@ -40,6 +40,7 @@ namespace Proyecto
                         Console.WriteLine("a) Search for music or videos");
                         Console.WriteLine("b) Go to playlists");
                         Console.WriteLine("c) Look for other profiles");
+                        Console.WriteLine("");
                         Console.WriteLine("d) Exit");
 
                         string Ans = Console.ReadLine();
@@ -170,7 +171,6 @@ namespace Proyecto
                                 Console.WriteLine(e.Message);
                             }
 
-
                             Console.WriteLine("Here's the public info in the account");
                             Console.WriteLine(" ");
 
@@ -189,6 +189,11 @@ namespace Proyecto
                             Console.WriteLine("List of people that this account follows: ");
                             Console.WriteLine(u2.GetFollowing());
                             Console.WriteLine(" ");
+                        }
+
+                        else
+                        {
+                            Console.WriteLine("Invalid Answer");
                         }
 
                     }
