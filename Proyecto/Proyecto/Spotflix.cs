@@ -7,8 +7,8 @@ namespace Proyecto
     [Serializable]
     public static class Spotflix
     {
-        private static Dictionary<string, User> UserDB = new Dictionary<string, User>();
-        private static List<Media> MediaDB = new List<Media>();
+        private static Dictionary<string, User> UserDB;
+        private static List<Media> MediaDB;
         static List<Song> SongDB = new List<Song>();
         static List<Video> VideoDB = new List<Video>();
 
@@ -18,6 +18,15 @@ namespace Proyecto
             //{"Videos", VideoDB}
         //};
 
+        static Spotflix()
+        {
+            Dictionary<string, User> userDB = MainClass.LoadUsers("SpotflixUsers.bin");
+            List<Media> mediaDB = MainClass.LoadMedia("SpotflixMedia.bin");
+            UserDB = userDB;
+            MediaDB = mediaDB;
+            
+
+        }
 
         public static List<Song> GetSongDB
         {
@@ -35,10 +44,12 @@ namespace Proyecto
             }
         }
 
-        static Spotflix()
-        {
+        public static List<Media> GetMediaDB { get { return MediaDB; } }
 
-        }
+        public static void SetMediaDB(List<Media> mediaDB) { mediaDB = MediaDB; }
+
+        public static void SetUserDB(Dictionary<string, User> userDB) { userDB = UserDB; }
+
 
         public static Dictionary<string, User> GetUserDB
         {
@@ -117,7 +128,7 @@ namespace Proyecto
                         {
                             Console.Clear();
                             Console.WriteLine("Wrong password!");
-                            return "";
+                            
                         }
 
                     }
@@ -127,7 +138,7 @@ namespace Proyecto
                         Console.WriteLine("Username doesn't exist!");
                         Thread.Sleep(1000);
                         Console.Clear();
-                        return "";
+                        
                     }
                     
 
@@ -181,7 +192,8 @@ namespace Proyecto
                     Console.CursorVisible = true;
                     username = RegexUtilities.WriteData(registrationForm[0]);
                     Console.CursorVisible = false;
-                    if (UserDB.ContainsKey(username))
+                    usertaken = UserDB.ContainsKey(username);
+                    if (usertaken == true)
                     {
                         usertaken = true;
                         Console.Clear();

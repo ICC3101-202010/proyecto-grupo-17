@@ -11,13 +11,24 @@ namespace Proyecto
 {
     class MainClass
     {
-        
+        static string fileNameUsers = "SpotflixUsers.bin";
+        static string fileNameMedia = "SpotflixMedia.bin";
+
         public static void Main(string[] args)
         {
             Console.CursorVisible = false;
             //Console.WriteLine("Hello, and welcome to Spotflix!");
+
+            Dictionary<string, User> loadUsers = LoadUsers(fileNameUsers);
+            List<Media> loadMedia = LoadMedia(fileNameMedia);
+
+            Spotflix.SetUserDB(loadUsers);
+            Spotflix.SetMediaDB(loadMedia);
             
-            List<string> start = new List<string>() { "Hello, and welcome to Spotflix!", "Log In" , "Register" , "Exit"};
+
+            List<string> start = new List<string>() { "Hello, and welcome to Spotflix!", "Log In" , "Register" , "Show users", "Exit"};
+            List<string> mainMenu = new List<string>() { "Menu", "Search", "Profile", "Log out" };
+
 
             while (true)
             {
@@ -25,13 +36,31 @@ namespace Proyecto
                 if (selectedMenuItem == "Log In")
                 {
                     Console.Clear();
-                    Spotflix.LogIn();
+                    string username = Spotflix.LogIn();
+
+                    if (username != "")
+                    {
+                        User activeUser = Spotflix.GetUserDB[username];
+                        while (true)
+                        {
+                            Console.Clear();
+                            selectedMenuItem = RegexUtilities.GetMenu(mainMenu);
+                            if (selectedMenuItem == "Log out") { username = ""; break; }
+
+                            else if (selectedMenuItem == "Search")
+                            {
+
+                            }
+                        }
+                    }
+                   
                 }
 
                 else if (selectedMenuItem == "Register")
                 {
                     Console.Clear();
                     Spotflix.Register();
+                    SaveAll();
                 }
 
                 
@@ -39,7 +68,29 @@ namespace Proyecto
 
                 else if (selectedMenuItem == "Exit")
                 {
+                    SaveAll();
                     Environment.Exit(0);
+                }
+                
+
+                else if (selectedMenuItem == "Show users")
+                {
+                    Console.Clear();
+                    foreach (User user in Spotflix.GetUserDB.Values)
+                    {
+                        Console.Write("Username: ");
+                        Console.WriteLine(user.GetUsername());
+                        Console.Write("Email: ");
+                        Console.WriteLine(user.GetEmail());
+                        Console.Write("Password: ");
+                        Console.WriteLine(user.GetPassword());
+                        Console.Write("Private: ");
+                        Console.WriteLine(user.GetPrivate());
+                        Console.Write("Premium: ");
+                        Console.WriteLine(user.GetPremium());
+                    }
+                    Thread.Sleep(5000);
+                    Console.Clear();
                 }
                 Console.Clear();
             }
@@ -250,7 +301,50 @@ namespace Proyecto
     */
         }
 
+        public static void SaveUsers(Dictionary<string,User> userDB, string name)
+        {
 
+            Stream stream = new FileStream(name, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            IFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, userDB);
+            stream.Close();
+        }
+
+        public static void SaveMedia(List<Media> mediaDB, string name)
+        {
+
+            Stream stream = new FileStream(name, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            IFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, mediaDB);
+            stream.Close();
+        }
+
+
+        public static Dictionary<string, User> LoadUsers(string name)
+        {
+            Stream stream = new FileStream(name, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            IFormatter formatter = new BinaryFormatter();
+            Dictionary<string, User> userDB = (Dictionary<string, User>)formatter.Deserialize(stream);
+            stream.Close();
+
+            return userDB;
+        }
+
+        public static List<Media> LoadMedia(string name)
+        {
+            Stream stream = new FileStream(name, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            IFormatter formatter = new BinaryFormatter();
+            List<Media> mediaDB = (List<Media>)formatter.Deserialize(stream);
+            stream.Close();
+
+            return mediaDB;
+        }
+
+        public static void SaveAll()
+        {
+            SaveUsers(Spotflix.GetUserDB, fileNameUsers);
+            SaveMedia(Spotflix.GetMediaDB, fileNameMedia);
+        }
     }
 
 
