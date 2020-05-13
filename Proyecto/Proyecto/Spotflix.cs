@@ -57,13 +57,84 @@ namespace Proyecto
         }
 
 
-        public static void LogIn()
+        public static string LogIn()
         {
-            Console.WriteLine("Welcome!");
-            Console.Write("Username: ");
-            string username = Console.ReadLine();
-            Console.Write("Password: ");
-            string password = Console.ReadLine();
+
+            string username = "";
+            string password = "";
+            string a = "";
+
+            List<string> opt = new List<string>() { "Welcome back!", "Username: ", "Password: ", "Log In ->", "Back"};
+            while (true)
+            {
+                Console.Clear();
+                string selected = RegexUtilities.GetMenu(opt);
+                if (selected == "Back")
+                {
+                    Console.Clear();
+                    return "";
+                    
+                }
+
+                else if (selected == opt[1])
+                {
+                    Console.CursorVisible = true;
+                    Console.Clear();
+                    opt[1] = opt[1].Substring(0, 10);
+                    username = RegexUtilities.WriteData(opt[1]);
+                    opt[1] += username;
+                    Console.CursorVisible = false;
+                }
+
+                else if (selected == opt[2])
+                {
+                    Console.Clear();
+                    Console.CursorVisible = true;
+                    opt[2] = opt[2].Substring(0, 10);
+                    Console.Write(opt[2]);
+                    password = RegexUtilities.HidePassword();
+                    a = "";
+                    foreach (char item in password) { a += "•"; }
+                    opt[2] = $"Password: {a}";
+                    Console.CursorVisible = false;
+
+                }
+
+                else if (selected == "Log In ->") 
+                {
+                    try
+                    {
+                        User user = UserDB[username];
+                        if (user.GetPassword() == password)
+                        {
+                            Console.WriteLine("Login successful!");
+                            Console.WriteLine($"Welcome {username}");
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                            return username;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Wrong password!");
+                            return "";
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Username doesn't exist!");
+                        Thread.Sleep(1000);
+                        Console.Clear();
+                        return "";
+                    }
+                    
+
+                } 
+            }
+
+
         }
 
 

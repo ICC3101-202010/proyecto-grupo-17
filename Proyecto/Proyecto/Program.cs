@@ -17,7 +17,7 @@ namespace Proyecto
             Console.CursorVisible = false;
             //Console.WriteLine("Hello, and welcome to Spotflix!");
             
-            List<string> start = new List<string>() { "Hello, and welcome to Spotflix!", "Log In" , "Register" ,"Show users", "Exit"};
+            List<string> start = new List<string>() { "Hello, and welcome to Spotflix!", "Log In" , "Register" , "Exit"};
 
             while (true)
             {
@@ -34,25 +34,8 @@ namespace Proyecto
                     Spotflix.Register();
                 }
 
-                else if (selectedMenuItem == "Show users")
-                {
-                    Console.Clear();
-                    foreach (User user in Spotflix.GetUserDB.Values)
-                    {
-                        Console.Write("Username: ");
-                        Console.WriteLine(user.GetUsername());
-                        Console.Write("Email: ");
-                        Console.WriteLine(user.GetEmail());
-                        Console.Write("Password: ");
-                        Console.WriteLine(user.GetPassword());
-                        Console.Write("Private: ");
-                        Console.WriteLine(user.GetPrivate());
-                        Console.Write("Premium: ");
-                        Console.WriteLine(user.GetPremium());
-                    }
-                    Thread.Sleep(10000);
-                    Console.Clear();
-                }
+                
+                
 
                 else if (selectedMenuItem == "Exit")
                 {
