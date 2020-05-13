@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace Proyecto
 {
+    [Serializable]
     public class Media
     {
         protected Dictionary<string, List<string>> Information = new Dictionary<string, List<string>>();

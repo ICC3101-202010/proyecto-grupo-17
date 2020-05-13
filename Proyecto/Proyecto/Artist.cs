@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Proyecto
 {
+    [Serializable]
     public class Artist : Person
     {
         private List<Album> Albums;

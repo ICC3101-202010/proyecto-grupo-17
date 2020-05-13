@@ -3,14 +3,15 @@ using System.Collections.Generic;
 
 namespace Proyecto
 {
+    [Serializable]
     public class Playlist
     {
         private string Name;
         private bool PrivateList;
         private List<Media> PList;
-        private User CreatedBy;
+        private string CreatedBy;
 
-        public Playlist(string name, bool privateList, User createdBy)
+        public Playlist(string name, bool privateList, string createdBy)
         {
 
             Name = name;

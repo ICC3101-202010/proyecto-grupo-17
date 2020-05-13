@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
 public class RegexUtilities
 {
+
+    public static int index = 0;
     public static bool IsValidEmail(string email)
     {
         if (string.IsNullOrWhiteSpace(email))
@@ -27,11 +30,11 @@ public class RegexUtilities
                 return match.Groups[1].Value + domainName;
             }
         }
-        catch (RegexMatchTimeoutException e)
+        catch (RegexMatchTimeoutException)
         {
             return false;
         }
-        catch (ArgumentException e)
+        catch (ArgumentException)
         {
             return false;
         }
@@ -49,12 +52,12 @@ public class RegexUtilities
         }
     }
 
-    public static string HidePassword()
-    {
-
-        string pass = "";
-        while (true)
+        public static string HidePassword()
         {
+
+            string pass = "";
+            while (true)
+            {
 
             
 
@@ -86,7 +89,105 @@ public class RegexUtilities
 
 
         }
-    }
+
+        public static string WriteData(string dataName)
+        {
+
+            string data = "";
+            while (true)
+            {
+
+
+                Console.Write(dataName + data);
+                ConsoleKeyInfo key = Console.ReadKey(true);
+
+                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+                {
+                    data += key.KeyChar;
+                    Console.Write(key.KeyChar);
+                }
+                else
+                {
+                    if (key.Key == ConsoleKey.Backspace && data.Length > 0)
+                    {
+                        data = data.Substring(0, (data.Length - 1));
+                        Console.Write("\b \b");
+                    }
+
+                    else if (key.Key == ConsoleKey.Enter)
+                    {
+                        break;
+                    }
+                }
+            Console.Clear();
+
+
+            }
+
+            dataName += data;
+            return data;
+
+
+        }
+
+        public static string GetMenu(List<string> items)    //usar con while
+        {
+            if (index > items.Count) { index = 0; }
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (i == index)
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Black;
+
+                    Console.WriteLine(items[i]);
+                }
+                else
+                {
+                    Console.WriteLine(items[i]);
+                }
+                Console.ResetColor();
+            }
+
+            ConsoleKeyInfo ckey = Console.ReadKey();
+
+            if (ckey.Key == ConsoleKey.DownArrow)
+            {
+                if (index == items.Count - 1)
+                {
+                    //index = 0; //Remove the comment to return to the topmost item in the list
+                }
+                else { index++; }
+            }
+            else if (ckey.Key == ConsoleKey.UpArrow)
+            {
+                if (index <= 0)
+                {
+                    //index = menuItem.Count - 1; //Remove the comment to return to the item in the bottom of the list
+                }
+                else { index--; }
+            }
+            else if (ckey.Key == ConsoleKey.Enter)
+            {
+                int selected = index;
+                index = 0;
+                return items[selected];
+                
+            }
+            else
+            {
+                Console.Clear();
+                return "";
+            }
+
+            Console.Clear();
+                
+            return "";
+        }
+}
+
+
+    
 
 
 

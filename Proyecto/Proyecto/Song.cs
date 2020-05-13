@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Proyecto
 {
+    [Serializable]
     public class Song : Media
     {
         //Dictionary<string, SongMetadata> Metadata = new Dictionary<string, SongMetadata>();

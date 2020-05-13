@@ -1,6 +1,7 @@
 ﻿using System;
 namespace Proyecto
 {
+    [Serializable]
     public class SongMetadata
     {
         public string Name;

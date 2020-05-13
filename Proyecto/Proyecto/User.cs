@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace Proyecto
 {
+    [Serializable]
     public class User
     {
         private List<object> UserData;
@@ -50,6 +51,17 @@ namespace Proyecto
         {
             return Email;
         }
+
+        public bool GetPrivate()
+        {
+            return PrivateAccount;
+        }
+
+        public bool GetPremium()
+        {
+            return Premium;
+        }
+
 
         public List<Playlist> GetPlaylist()
         {
@@ -127,7 +139,7 @@ namespace Proyecto
                 }
             }
 
-            Playlist a = new Playlist(name, privateList, Spotflix.GetUserDB[UserName]);
+            Playlist a = new Playlist(name, privateList, UserName);
             Playlists.Add(a);
         }
 

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace Proyecto
 {
+    [Serializable]
     public class Filter
     {
         public Filter()
         {
         }
-
+        /*
         public List<object> FilteredSearch(List<int> filters, string a)
         {
             List<object> FilteredRes = new List<object>();
@@ -230,7 +231,7 @@ namespace Proyecto
 
             return SearchResults;
         }
-
+        */
     }
 
 }

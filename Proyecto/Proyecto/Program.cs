@@ -2,17 +2,68 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using System.Threading;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Proyecto
 {
     class MainClass
     {
-
+        
         public static void Main(string[] args)
         {
+            Console.CursorVisible = false;
+            //Console.WriteLine("Hello, and welcome to Spotflix!");
             
-            Console.WriteLine("Hello, and welcome to Spotflix!");
-            Console.WriteLine("Are you a new user or a returning one? new/returning");
+            List<string> start = new List<string>() { "Hello, and welcome to Spotflix!", "Log In" , "Register" ,"Show users", "Exit"};
+
+            while (true)
+            {
+                string selectedMenuItem = RegexUtilities.GetMenu(start);
+                if (selectedMenuItem == "Log In")
+                {
+                    Console.Clear();
+                    Spotflix.LogIn();
+                }
+
+                else if (selectedMenuItem == "Register")
+                {
+                    Console.Clear();
+                    Spotflix.Register();
+                }
+
+                else if (selectedMenuItem == "Show users")
+                {
+                    Console.Clear();
+                    foreach (User user in Spotflix.GetUserDB.Values)
+                    {
+                        Console.Write("Username: ");
+                        Console.WriteLine(user.GetUsername());
+                        Console.Write("Email: ");
+                        Console.WriteLine(user.GetEmail());
+                        Console.Write("Password: ");
+                        Console.WriteLine(user.GetPassword());
+                        Console.Write("Private: ");
+                        Console.WriteLine(user.GetPrivate());
+                        Console.Write("Premium: ");
+                        Console.WriteLine(user.GetPremium());
+                    }
+                    Thread.Sleep(10000);
+                    Console.Clear();
+                }
+
+                else if (selectedMenuItem == "Exit")
+                {
+                    Environment.Exit(0);
+                }
+                Console.Clear();
+            }
+
+
+            /*
+
             string ans = Console.ReadLine();
 
             if (ans == "new")
@@ -213,7 +264,7 @@ namespace Proyecto
 
             }
 
-
+    */
         }
 
 
