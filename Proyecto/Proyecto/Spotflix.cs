@@ -20,8 +20,11 @@ namespace Proyecto
 
         static Spotflix()
         {
-            Dictionary<string, User> userDB = MainClass.LoadUsers("SpotflixUsers.bin");
-            List<Media> mediaDB = MainClass.LoadMedia("SpotflixMedia.bin");
+            var load = MainClass.Load("Spotflix.bin");
+
+            Dictionary<string, User> userDB = load.Item1;
+            List<Media> mediaDB = load.Item2;
+
             UserDB = userDB;
             MediaDB = mediaDB;
             

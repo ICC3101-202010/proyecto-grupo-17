@@ -50,6 +50,7 @@
     <Compile Include="SongMetadata.cs" />
     <Compile Include="VideoMetadata.cs" />
     <Compile Include="Filter.cs" />
+    <Compile Include="Porsiaca.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
