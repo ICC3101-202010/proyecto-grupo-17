@@ -6,8 +6,6 @@ namespace Proyecto
 {
     public class User
     {
-        private Dictionary<string, List<object>> UserDict;
-
         private List<object> UserData;
         private string UserName;
         private string Email;

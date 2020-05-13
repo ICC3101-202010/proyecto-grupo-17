@@ -5,11 +5,11 @@ namespace Proyecto
     {
         public string Name;
         public Artist Artist1;
-        public string Album;
+        public Album Album;
         public string Genre;
         public int PublicationYear;
 
-        public SongMetadata(string name, Artist artist, string album, string genre, int publicationYear)
+        public SongMetadata(string name, Artist artist, Album album, string genre, int publicationYear)
         {
             Name = name;
             Artist1 = artist;

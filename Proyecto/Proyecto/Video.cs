@@ -12,7 +12,7 @@ namespace Proyecto
         int FPS;
         VideoMetadata Metadata;
 
-        public Video(Dictionary<string, List<string>> Information, VideoMetadata Metadata, int Users_Like, double Score, int Views, string name, string creator, double duration, string max_quality, List<string> comments, int FPS) : base(Information)
+        public Video(Dictionary<string, List<string>> Information, VideoMetadata Metadata, int Users_Like, double Score, int Views, double duration, string max_quality, List<string> comments, int FPS) : base(Information)
         {
             this.duration = duration;
             this.max_quality = max_quality;
