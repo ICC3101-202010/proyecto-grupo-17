@@ -52,27 +52,65 @@ public class RegexUtilities
         }
     }
 
-        public static string HidePassword()
-        {
+    public static string HidePassword()
+    {
 
-            string pass = "";
-            while (true)
-            {
+        string pass = "";
+        while (true)
+        {
 
             
 
+        ConsoleKeyInfo key = Console.ReadKey(true);
+
+        if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+        {
+            pass += key.KeyChar;
+            Console.Write("•");
+        }
+        else
+        {
+            if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
+            {
+                pass = pass.Substring(0, (pass.Length - 1));
+                Console.Write("\b \b");
+            }
+
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                break;
+            }
+        }
+
+
+            
+    }
+    return pass;
+
+
+    }
+
+    public static string WriteData(string dataName)
+    {
+
+        string data = "";
+        while (true)
+        {
+
+
+            Console.Write(dataName + data);
             ConsoleKeyInfo key = Console.ReadKey(true);
 
             if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
             {
-                pass += key.KeyChar;
-                Console.Write("•");
+                data += key.KeyChar;
+                Console.Write(key.KeyChar);
             }
             else
             {
-                if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
+                if (key.Key == ConsoleKey.Backspace && data.Length > 0)
                 {
-                    pass = pass.Substring(0, (pass.Length - 1));
+                    data = data.Substring(0, (data.Length - 1));
                     Console.Write("\b \b");
                 }
 
@@ -81,109 +119,133 @@ public class RegexUtilities
                     break;
                 }
             }
-
-
-            
-        }
-        return pass;
+        Console.Clear();
 
 
         }
 
-        public static string WriteData(string dataName)
+        dataName += data;
+        return data;
+
+
+    }
+
+    public static string GetMenu(List<string> items)    //usar con while
+    {
+        if (index > items.Count) { index = 0; }
+        for (int i = 0; i < items.Count; i++)
         {
-
-            string data = "";
-            while (true)
+            if (i == index)
             {
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Black;
 
-
-                Console.Write(dataName + data);
-                ConsoleKeyInfo key = Console.ReadKey(true);
-
-                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
-                {
-                    data += key.KeyChar;
-                    Console.Write(key.KeyChar);
-                }
-                else
-                {
-                    if (key.Key == ConsoleKey.Backspace && data.Length > 0)
-                    {
-                        data = data.Substring(0, (data.Length - 1));
-                        Console.Write("\b \b");
-                    }
-
-                    else if (key.Key == ConsoleKey.Enter)
-                    {
-                        break;
-                    }
-                }
-            Console.Clear();
-
-
-            }
-
-            dataName += data;
-            return data;
-
-
-        }
-
-        public static string GetMenu(List<string> items)    //usar con while
-        {
-            if (index > items.Count) { index = 0; }
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (i == index)
-                {
-                    Console.BackgroundColor = ConsoleColor.Green;
-                    Console.ForegroundColor = ConsoleColor.Black;
-
-                    Console.WriteLine(items[i]);
-                }
-                else
-                {
-                    Console.WriteLine(items[i]);
-                }
-                Console.ResetColor();
-            }
-
-            ConsoleKeyInfo ckey = Console.ReadKey();
-
-            if (ckey.Key == ConsoleKey.DownArrow)
-            {
-                if (index == items.Count - 1)
-                {
-                    //index = 0; //Remove the comment to return to the topmost item in the list
-                }
-                else { index++; }
-            }
-            else if (ckey.Key == ConsoleKey.UpArrow)
-            {
-                if (index <= 0)
-                {
-                    //index = menuItem.Count - 1; //Remove the comment to return to the item in the bottom of the list
-                }
-                else { index--; }
-            }
-            else if (ckey.Key == ConsoleKey.Enter)
-            {
-                int selected = index;
-                index = 0;
-                return items[selected];
-                
+                Console.WriteLine(items[i]);
             }
             else
             {
-                Console.Clear();
-                return "";
+                Console.WriteLine(items[i]);
             }
+            Console.ResetColor();
+        }
 
-            Console.Clear();
+        ConsoleKeyInfo ckey = Console.ReadKey();
+
+        if (ckey.Key == ConsoleKey.DownArrow)
+        {
+            if (index == items.Count - 1)
+            {
+                //index = 0; //Remove the comment to return to the topmost item in the list
+            }
+            else { index++; }
+        }
+        else if (ckey.Key == ConsoleKey.UpArrow)
+        {
+            if (index <= 0)
+            {
+                //index = menuItem.Count - 1; //Remove the comment to return to the item in the bottom of the list
+            }
+            else { index--; }
+        }
+        else if (ckey.Key == ConsoleKey.Enter)
+        {
+            int selected = index;
+            index = 0;
+            return items[selected];
                 
+        }
+        else
+        {
+            Console.Clear();
             return "";
         }
+
+        Console.Clear();
+                
+        return "";
+    }
+
+    public static List<string> WriteList(string type)
+    {
+        List<string> lst = new List<string>();
+
+        List<string> menu = new List<string>() {$"Add {type}", $"Remove {type}", "Done!" };
+        string elem = null;
+        string sel = "";
+        while (true)
+        {
+            sel = "";
+            Console.Clear();
+            while (sel == "")
+            {
+                if (lst.Count>0)
+                {
+                    foreach (string x in lst)
+                    {
+                        Console.WriteLine($"{type}: {x}");
+                    }
+                    
+                }
+                sel = GetMenu(menu);
+
+            }
+
+            if (sel == menu[0])
+            {
+                Console.Clear();
+                elem = WriteData(type+ ": ");
+                lst.Add(elem);
+                Console.Clear();
+
+            }
+
+            else if (sel == menu[1])
+            {
+                while (lst.Count > 0)
+                {
+                    Console.Clear();
+                    sel = GetMenu(lst);
+                    if (lst.Contains(sel))
+                    {
+                        lst.Remove(sel);
+                        Console.Clear();
+                        break;
+                    }
+                }
+                
+            }
+
+            else if (sel == menu[2])
+            {
+                Console.Clear();
+                return lst;
+            }
+            
+
+        }
+
+
+    }
 }
 
 

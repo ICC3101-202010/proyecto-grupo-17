@@ -19,8 +19,9 @@ namespace Proyecto
         private List<object> Likes;
         private bool Premium;
         private List<Playlist> Playlists;
+        private bool Admin;
 
-        public User(string name, string email, string password, bool privateAccount, bool premium)
+        public User(string name, string email, string password, bool privateAccount, bool premium, bool admin)
         {
             UserName = name;
             Email = email;
@@ -40,6 +41,11 @@ namespace Proyecto
         public string GetPassword()
         {
             return Password;
+        }
+
+        public bool GetAdmin()
+        {
+            return Admin;
         }
 
         public string GetUsername()
@@ -148,6 +154,67 @@ namespace Proyecto
 
         }
 
+
+        public void AddMedia()
+        {
+            List<string> opts = new List<string>() { "Song", "Video", "Back" };
+            string sel = null;
+            while (true)
+            {
+                Console.Clear();
+                sel = RegexUtilities.GetMenu(opts);
+                if (sel == opts[2]) { return; }
+
+                else if (sel == opts[0])
+                {
+                    Console.Clear();
+                    string fName = RegexUtilities.WriteData("File Name(with extension):  ");
+                    Console.Clear();
+                    SongMetadata sMeta = new SongMetadata();
+                    // Falta la informacion
+
+                    try
+                    {
+                        Song song = new Song(sMeta, fName);
+
+                        sMeta.GetArtist().AddSong(song);
+                        sMeta.GetAlbum().AddSong(song);
+                        Spotflix.AddMedia(song);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+
+                else if (sel == opts[1])
+                {
+                    Console.Clear();
+                    string fName = RegexUtilities.WriteData("File Name(with extension):  ");
+                    Console.Clear();
+                    // Falta la informacion
+
+                    Video video = new Video(fName);
+
+                    Spotflix.AddMedia(video);
+
+                    //video.Get
+
+                    /*sMeta.GetDirector().AddVideo(video);
+                    foreach (Person ppl in sMeta.GetActors())
+                    {
+                        ppl.AddVideo(video);
+                    }*/
+                }
+
+
+            }
+
+
+
+
+
+        }
     }
 }
 

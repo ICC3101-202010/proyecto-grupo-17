@@ -9,9 +9,9 @@ namespace Proyecto
         //Dictionary<string, SongMetadata> Metadata = new Dictionary<string, SongMetadata>();
         private SongMetadata s1;
 
-        public Song(Dictionary<string, List<string>> Information, SongMetadata metadata) : base(Information)
+        public Song(SongMetadata metadata, string fileName) : base(fileName)
         {
-            metadata = s1;
+            s1 = metadata;
         }
 
         public SongMetadata GetMetadata

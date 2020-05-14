@@ -6,6 +6,9 @@ using System.Threading;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Media;
+
+
 
 namespace Proyecto
 {
@@ -17,14 +20,16 @@ namespace Proyecto
         public static void Main(string[] args)
         {
             Console.CursorVisible = false;
-            
 
             
-            
 
-            List<string> start = new List<string>() { "Hello, and welcome to Spotflix!", "Log In" , "Register" , "Show users", "Exit"};
-            List<string> mainMenu = new List<string>() { "Menu", "Search", "Profile", "Log out" };
 
+
+
+
+            List<string> start = new List<string>() { "Hello, and welcome to Spotflix!", "Log In" , "Register" ,"Admin Log In", "Exit"};
+            List<string> mainMenu = new List<string>() { "Menu", "Search", "Profile", "play", "Log out" };
+            List<string> searchMenu = new List<string>() {"Search: ", "Filters", "Go!", "Back" };
 
             while (true)
             {
@@ -45,10 +50,38 @@ namespace Proyecto
 
                             else if (selectedMenuItem == "Search")
                             {
+                                while (true)
+                                {
+                                    Console.Clear();
+                                    selectedMenuItem = RegexUtilities.GetMenu(searchMenu);
+
+                                    if (selectedMenuItem == searchMenu[0])
+                                    {
+                                        string searchKey = RegexUtilities.WriteData(searchMenu[0]);
+                                    }
+
+
+                                }
+                            }
+
+                            else if (selectedMenuItem == "play")
+                            {
+
+
+                                //SoundPlayer player = new SoundPlayer();
+                                //player.SoundLocation = "CSI.wav";
+                                //player.Play();
+                                //Player player = new Player();
+                                //player.Open("CSI.wav");
+                                //Thread.Sleep(30000);
+                                //player.End();
+                                
+
 
                             }
                         }
                     }
+                    
                    
                 }
 
@@ -56,38 +89,50 @@ namespace Proyecto
                 {
                     Console.Clear();
                     Spotflix.Register();
-                    Save(Spotflix.GetUserDB , Spotflix.GetMediaDB, fileName);
+                    Save(Spotflix.GetUserDB , Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
                 }
 
-                
-                
+                else if (selectedMenuItem == "Admin Log In")
+                {
+                    Console.Clear();
+                    string adm = Spotflix.AdminLogIn();
+                    if (adm != "")
+                    {
+                        User administrator = Spotflix.GetUserDB[adm];
+                        List<string> admMenu = new List<string>() { "Add Media", "a", "b", "c", "Log out" };
+                        while (true)
+                        {
+                            Console.Clear();
+                            selectedMenuItem = RegexUtilities.GetMenu(admMenu);
+
+                            if (selectedMenuItem == "Add Media")
+                            {
+                                administrator.AddMedia();
+                            }
+                        }
+
+
+
+                    }
+
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You are not an administrator.");
+                    }
+                    Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
+                }
+
+
 
                 else if (selectedMenuItem == "Exit")
                 {
-                    Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, fileName);
+                    Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
                     Environment.Exit(0);
                 }
                 
 
-                else if (selectedMenuItem == "Show users")
-                {
-                    Console.Clear();
-                    foreach (User user in Spotflix.GetUserDB.Values)
-                    {
-                        Console.Write("Username: ");
-                        Console.WriteLine(user.GetUsername());
-                        Console.Write("Email: ");
-                        Console.WriteLine(user.GetEmail());
-                        Console.Write("Password: ");
-                        Console.WriteLine(user.GetPassword());
-                        Console.Write("Private: ");
-                        Console.WriteLine(user.GetPrivate());
-                        Console.Write("Premium: ");
-                        Console.WriteLine(user.GetPremium());
-                    }
-                    Thread.Sleep(5000);
-                    Console.Clear();
-                }
+                
                 Console.Clear();
             }
 
@@ -297,24 +342,26 @@ namespace Proyecto
     */
         }
 
-        public static void Save(Dictionary<string, User> userDB, List<Media> mediaDB, string name)
+        public static void Save(Dictionary<string, User> userDB, List<Media> mediaDB, List<Person> peopleDB ,string name)
         {
             Stream stream = new FileStream(name, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
             IFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, userDB);
             formatter.Serialize(stream, mediaDB);
+            formatter.Serialize(stream, peopleDB);
             stream.Close();
         }
 
-        public static (Dictionary<string, User> ,List<Media>) Load(string name)
+        public static (Dictionary<string, User> ,List<Media>, List<Person>) Load(string name)
         {
             Stream stream = new FileStream(name, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
             IFormatter formatter = new BinaryFormatter();
             Dictionary<string, User> userDB = (Dictionary<string, User>)formatter.Deserialize(stream);
             List<Media> mediaDB = (List<Media>)formatter.Deserialize(stream);
+            List<Person> peopleDB = (List<Person>)formatter.Deserialize(stream);
             stream.Close();
 
-            return (userDB, mediaDB);
+            return (userDB, mediaDB, peopleDB);
         }
     }
 

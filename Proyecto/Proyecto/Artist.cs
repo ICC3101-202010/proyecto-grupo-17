@@ -9,14 +9,51 @@ namespace Proyecto
         private List<Album> Albums;
         private List<Song> Songs;
         private List<User> Followers;
-        private string Studio;
 
-        public Artist(string name, List<string> professions, int age, List<Album> albums, List<Song> songs, List<User> followers, string studio) : base(name, professions, age)
+        public Artist(string name) : base(name)
         {
+            Name = name;
+            List<Album> albums = new List<Album>();
+            List<Song> songs = new List<Song>();
+            List<User> followers = new List<User>();
+
             Albums = albums;
             Songs = songs;
             Followers = followers;
-            Studio = studio;
+
+        }
+
+        public List<Song> GetSongs()
+        {
+            return Songs;
+        }
+
+        public List<User> GetFollowers()
+        {
+            return Followers;
+        }
+
+        public List<Album> GetAlbums()
+        {
+            return Albums;
+        }
+
+        public void AddAlbum(Album album)
+        {
+            //Event
+            Albums.Add(album);
+        }
+
+        public void AddSong(Song song)
+        {
+            //Event
+            Songs.Add(song);
+        }
+
+        public void AddFollower(User user)
+        {
+            //Event -> Remove en el mismo metodo?
+            Followers.Add(user);
         }
     }
 }

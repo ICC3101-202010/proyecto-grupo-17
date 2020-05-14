@@ -9,6 +9,7 @@ namespace Proyecto
     {
         private static Dictionary<string, User> UserDB;
         private static List<Media> MediaDB;
+        private static List<Person> PeopleDB;
         static List<Song> SongDB = new List<Song>();
         static List<Video> VideoDB = new List<Video>();
 
@@ -20,14 +21,18 @@ namespace Proyecto
 
         static Spotflix()
         {
+            
+            
             var load = MainClass.Load("Spotflix.bin");
 
             Dictionary<string, User> userDB = load.Item1;
             List<Media> mediaDB = load.Item2;
+            List<Person> peopleDB = load.Item3;
+
 
             UserDB = userDB;
             MediaDB = mediaDB;
-            
+            PeopleDB = peopleDB;
 
         }
 
@@ -47,11 +52,35 @@ namespace Proyecto
             }
         }
 
+        public static List<Person> GetPeopleDB
+        {
+            get
+            {
+                return PeopleDB;
+            }
+        }
+
         public static List<Media> GetMediaDB { get { return MediaDB; } }
 
         public static void SetMediaDB(List<Media> mediaDB) { mediaDB = MediaDB; }
 
         public static void SetUserDB(Dictionary<string, User> userDB) { userDB = UserDB; }
+
+        public static void AddPerson(Person person)
+        {
+            PeopleDB.Add(person);
+        }
+
+        public static void AddMedia(Media media)
+        {
+            MediaDB.Add(media);
+        }
+
+        public static void AddUser(User user)
+        {
+            UserDB.Add(user.GetUsername(), user);
+        }
+
 
 
         public static Dictionary<string, User> GetUserDB
@@ -131,7 +160,9 @@ namespace Proyecto
                         {
                             Console.Clear();
                             Console.WriteLine("Wrong password!");
-                            
+                            Thread.Sleep(1000);
+                            Console.Clear();
+
                         }
 
                     }
@@ -150,7 +181,21 @@ namespace Proyecto
 
 
         }
-
+        public static string AdminLogIn()
+        {
+            string username = LogIn();
+            User user = UserDB[username];
+            if (user.GetAdmin() == true)
+            {
+                return username;
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Sorry, you are not an administrator.");
+                return "";
+            }
+        }
 
         public static void Register()
         {
@@ -384,7 +429,7 @@ namespace Proyecto
                     }
                     else
                     {
-                        User user = new User(username, email, password, privateAccount, premium);
+                        User user = new User(username, email, password, privateAccount, premium, false);
                         UserDB.Add(username, user);
                         Console.Clear();
                         Console.WriteLine("User created successfully!");
