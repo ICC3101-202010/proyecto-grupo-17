@@ -51,6 +51,10 @@ namespace Proyecto
                                     if (selectedMenuItem == searchMenu[0])
                                     {
                                         string searchKey = RegexUtilities.WriteData(searchMenu[0]);
+                                        Filter fil = new Filter();
+                                        List<Media> results = fil.Search(searchKey);
+
+
                                     }
 
 

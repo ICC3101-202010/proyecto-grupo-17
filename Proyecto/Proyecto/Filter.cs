@@ -145,23 +145,21 @@ namespace Proyecto
 
 
 
-
-        public List<object> Search(string a)
+            */
+        public List<Media> Search(string key)
         {
-            List<object> SearchResults = new List<object>();
-            int number = 0;
+            List<Media> SearchResults = new List<Media>();
 
-            List<Song> SFSongs = Spotflix.GetSongDB;
-            List<Song> SongResults = new List<Song>();
+            List<Media> SF = Spotflix.GetMediaDB;
+            
 
-            foreach(Song s in SFSongs)
+            foreach(Song s in SF)
             {
-                bool proof = false;
                 List<string> Options = new List<string>();
-                string o1 = s.GetMetadata.Name;
-                string o2 = s.GetMetadata.Artist1.Name;
-                string o3 = s.GetMetadata.Album;
-                string o4 = s.GetMetadata.Genre;
+                string o1 = s.GetMetadata.GetName();
+                string o2 = s.GetMetadata.GetArtist().GetName();
+                string o3 = s.GetMetadata.GetAlbum().GetName();
+                string o4 = s.GetMetadata.GetGenre();
 
                 Options.Add(o1);
                 Options.Add(o2);
@@ -170,35 +168,27 @@ namespace Proyecto
 
                 foreach (string i in Options)
                 {
-                    if (proof == false)
+                   
+                    if (i.Contains(key) == true)
                     {
-                        if (i == a)
-                        {
-                            SongResults.Add(s);
-                            proof = true;
-                            number = 1;
-                        }
+                        SearchResults.Add(s);
+                       
                     }
+                    
                 }
             }
 
-            SearchResults.Add(SongResults);
 
-
-            List<Video> SFVideos = Spotflix.GetVideoDB;
-            List<Video> VidResults = new List<Video>();
-
-            foreach(Video v in SFVideos)
+            foreach(Video v in SF)
             {
-                bool proof = false;
                 List<string> Options2 = new List<string>();
 
-                string o1 = v.GetMetadata.Name;
-                string o2 = v.GetMetadata.Creator;
-                string o3 = v.GetMetadata.Genre;
-                string o4 = v.GetMetadata.Category;
-                string o5 = v.GetMetadata.Director.Name;
-                string o6 = v.GetMetadata.Studio;
+                string o1 = v.GetMetadata.GetName();
+                string o2 = v.GetMetadata.GetCreator();
+                string o3 = v.GetMetadata.GetGenre();
+                string o4 = v.GetMetadata.GetCategory();
+                string o5 = v.GetMetadata.GetDirector().GetName();
+                string o6 = v.GetMetadata.GetStudio();
 
                 Options2.Add(o1);
                 Options2.Add(o2);
@@ -209,29 +199,28 @@ namespace Proyecto
 
                 foreach (string i in Options2)
                 {
-                    if (proof == false)
-                    {
-                        if (i == a)
+                        if (i.Contains(key) == true)
                         {
-                            VidResults.Add(v);
-                            proof = true;
+                            SearchResults.Add(v);
+                            
                         }
-                    }
+                    
                     
                 }
 
             }
-
-            SearchResults.Add(VidResults);
-
-            if (number == 0)
+            if (SearchResults.Count == 0)
             {
                 Console.WriteLine("Your search has returned no results");
+                return SearchResults;
             }
-
-            return SearchResults;
+            else
+            {
+                return SearchResults;
+            }
+            
         }
-        */
+        
     }
 
 }
