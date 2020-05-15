@@ -6,19 +6,19 @@ namespace Proyecto
     [Serializable]
     public class Song : Media
     {
-        //Dictionary<string, SongMetadata> Metadata = new Dictionary<string, SongMetadata>();
-        private SongMetadata s1;
+        
+        private SongMetadata MetaData;
 
         public Song(SongMetadata metadata, string fileName) : base(fileName)
         {
-            s1 = metadata;
+            MetaData = metadata;
         }
 
         public SongMetadata GetMetadata
         {
             get
             {
-                return s1;
+                return MetaData;
             }
         }
     }

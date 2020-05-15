@@ -36,6 +36,7 @@ namespace Proyecto
             Queue = queue;
             Playlists = playlists;
             Premium = premium;
+            Admin = admin;
         }
 
         public string GetPassword()
@@ -68,6 +69,7 @@ namespace Proyecto
             return Premium;
         }
 
+        public void MakeAdmin() { Admin = true; }
 
         public List<Playlist> GetPlaylist()
         {
@@ -153,6 +155,8 @@ namespace Proyecto
         {
 
         }
+
+
 
 
         public void AddMedia()

@@ -193,6 +193,7 @@ namespace Proyecto
             {
                 Console.Clear();
                 Console.WriteLine("Sorry, you are not an administrator.");
+                Thread.Sleep(1000);
                 return "";
             }
         }

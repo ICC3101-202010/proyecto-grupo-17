@@ -20,13 +20,6 @@ namespace Proyecto
         public static void Main(string[] args)
         {
             Console.CursorVisible = false;
-
-            
-
-
-
-
-
             List<string> start = new List<string>() { "Hello, and welcome to Spotflix!", "Log In" , "Register" ,"Admin Log In", "Exit"};
             List<string> mainMenu = new List<string>() { "Menu", "Search", "Profile", "play", "Log out" };
             List<string> searchMenu = new List<string>() {"Search: ", "Filters", "Go!", "Back" };
@@ -94,11 +87,15 @@ namespace Proyecto
 
                 else if (selectedMenuItem == "Admin Log In")
                 {
+                    
                     Console.Clear();
                     string adm = Spotflix.AdminLogIn();
                     if (adm != "")
                     {
                         User administrator = Spotflix.GetUserDB[adm];
+
+
+
                         List<string> admMenu = new List<string>() { "Add Media", "a", "b", "c", "Log out" };
                         while (true)
                         {
@@ -109,6 +106,18 @@ namespace Proyecto
                             {
                                 administrator.AddMedia();
                             }
+
+                            else if (selectedMenuItem == "Log out")
+                            {
+                                adm = "";
+                                break;
+                            }
+
+                            else if (selectedMenuItem == "a")
+                            {
+                                
+
+                            } 
                         }
 
 
@@ -119,8 +128,11 @@ namespace Proyecto
                     {
                         Console.Clear();
                         Console.WriteLine("You are not an administrator.");
+                        break;
                     }
-                    Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
+                        
+                    
+                Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
                 }
 
 

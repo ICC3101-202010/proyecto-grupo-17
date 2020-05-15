@@ -15,6 +15,8 @@ namespace Proyecto
         private string Studio;
         private int PubYear;
         private string Description;
+        private string Resolution;
+        private string AspectRatio;
 
         public VideoMetadata()
         {
@@ -30,15 +32,16 @@ namespace Proyecto
         public string GetDescription() { return Description; }
         public List<Person> GetActors() { return Actors; }
         public Person GetDirector() { return Director; }
+        public string GetResolution() { return Resolution; }
+        public string GetAspectRatio() { return AspectRatio; }
 
-        
 
 
 
         public void Add()
         {
             List<string> metaMenu = new List<string>() {"Name: ","Creator: ","Genre: ","Category: ", "Actors: ", "Director: ",
-            "Studio", "Release Year: ", "Description: ", "Done!", "Back"};
+            "Studio", "Release Year: ", "Description: ", "Resolution: ", "Aspect Ratio: ","Done!", "Back"};
             string name = "";
             string creator = "";
             string genre = "";
@@ -50,6 +53,11 @@ namespace Proyecto
             int relYear = 0;
             bool dirExist = false;
             string director = "";
+            string resolution = "";
+            string aspectRatio = "";
+            List<string> resList = new List<string>() { "480p (720 x 480)", "720p (1280 x 720)", "1080p (1920 x 1080)",
+                "1440p (2560 x 1440)" , "4K (3840 x 2160)", "8K (7680 x 4320)"};
+            List<string> ratioList = new List<string>() {"Standard (4:3)", "Widescrenn 16:9", "Ultra Widescreen 21:9" };
             List<string> actors = new List<string>();
 
             while (true)
@@ -178,7 +186,34 @@ namespace Proyecto
                     Console.Clear();
                 }
 
-                else if (sel == metaMenu[9]) //Done[9]
+                else if (sel == metaMenu[9]) //Res[9]
+                {
+                    metaMenu[9] = metaMenu[9].Substring(0, 12);
+                    Console.Clear();
+                    resolution = "";
+                    while (resolution == "")
+                    {
+                        resolution = RegexUtilities.GetMenu(resList);
+                    }
+                    Console.CursorVisible = false;
+                    metaMenu[9] += resolution;
+                    Console.Clear();
+                }
+
+                else if (sel == metaMenu[10]) //ratio[10]
+                {
+                    metaMenu[10] = metaMenu[10].Substring(0, 14);
+                    Console.Clear();
+                    aspectRatio = "";
+                    while (aspectRatio == "")
+                    {
+                        aspectRatio = RegexUtilities.GetMenu(ratioList);
+                    }
+                    Console.CursorVisible = false;
+                    metaMenu[10] += aspectRatio;
+                    Console.Clear();
+                }
+                else if (sel == metaMenu[11]) //Done[11]
                 {
                     if (dirExist == true)
                     {
@@ -214,8 +249,8 @@ namespace Proyecto
                     }
 
 
-                    if (name != "" && creator != "" && genre != "" && category != "" && actrs.Count>0 && director != "" && studio != ""
-                        && relYear > 0 && description != "")
+                    if (name != "" && creator != "" && genre != "" && category != "" && actrs.Count > 0 && director != "" && studio != ""
+                        && relYear > 0 && description != "" && resolution != "" && aspectRatio != "")
                     {
                         Console.Clear();
                         Name = name;
@@ -227,11 +262,13 @@ namespace Proyecto
                         Studio = studio;
                         PubYear = relYear;
                         Description = description;
+                        Resolution = resolution;
+                        AspectRatio = aspectRatio;
                     }
                     Console.Clear();
                 }
 
-                else if (sel == metaMenu[10]) //Back[10]
+                else if (sel == metaMenu[12]) //Back[12]
                 {
                     return;
                 }
