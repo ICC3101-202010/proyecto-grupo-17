@@ -270,6 +270,7 @@ public class RegexUtilities
             for (int i = 0; i < a; i++)
             {
                 Console.Write(b);
+                Thread.Sleep(10)  //Load animado
                 
             }
         }
