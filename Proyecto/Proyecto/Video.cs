@@ -8,21 +8,19 @@ namespace Proyecto
     {
 
         private List<string> comments = new List<string>();
-        private VideoMetadata Metadata;
+        private VideoMetadata MetaData;
 
         public Video(string fileName) : base(fileName)
         {
             
             VideoMetadata meta = new VideoMetadata();
-            Metadata = meta;
+            MetaData = meta;
         }
 
-        public VideoMetadata GetMetadata
-        {
-            get
-            {
-                return Metadata;
-            }
+        public override Metadata GetMetadata()
+        { 
+            return MetaData;
+            
         }
 
 

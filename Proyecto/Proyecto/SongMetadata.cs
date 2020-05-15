@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Proyecto
 {
     [Serializable]
-    public class SongMetadata
+    public class SongMetadata : Metadata
     {
         private string Name;
         private Artist Artist;
@@ -19,10 +19,10 @@ namespace Proyecto
             Add();
         }
 
-        public string GetName() { return Name; }
-        public Artist GetArtist() { return Artist; }
-        public Album GetAlbum() { return Album; }
-        public string GetGenre() { return Genre; }
+        public override string GetName() { return Name; }
+        public override Artist GetArtist() { return Artist; }
+        public override Album GetAlbum() { return Album; }
+        public override string GetGenre() { return Genre; }
         public int GetPublicationYear() { return PublicationYear; }
         public string GetLabel() { return RecordLabel; }
 
@@ -129,7 +129,7 @@ namespace Proyecto
 
                 else if (sel == metaMenu[5]) //Label[5]
                 {
-                    metaMenu[5] = metaMenu[5].Substring(0, 7);
+                    metaMenu[5] = metaMenu[5].Substring(0, 14);
                     Console.Clear();
                     Console.CursorVisible = true;
                     label = RegexUtilities.WriteData(metaMenu[5]);
@@ -188,6 +188,7 @@ namespace Proyecto
                         Genre = genre;
                         RecordLabel = label;
                         PublicationYear = relYear;
+                        return;
 
                     }
 
@@ -206,6 +207,31 @@ namespace Proyecto
             }
 
 
+        }
+
+        public override string GetCreator()
+        {
+            return null;
+        }
+
+        public override string GetCategory()
+        {
+            return null;
+        }
+
+        public override Person GetDirector()
+        {
+            return null;
+        }
+
+        public override string GetStudio()
+        {
+            return null;
+        }
+
+        public override List<Person> GetActors()
+        {
+            return null;
         }
     }
 }

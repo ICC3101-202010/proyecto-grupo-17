@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 public class RegexUtilities
 {
@@ -63,7 +64,8 @@ public class RegexUtilities
 
         ConsoleKeyInfo key = Console.ReadKey(true);
 
-        if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+        if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.DownArrow
+                && key.Key != ConsoleKey.LeftArrow && key.Key != ConsoleKey.RightArrow && key.Key != ConsoleKey.UpArrow)
         {
             pass += key.KeyChar;
             Console.Write("•");
@@ -101,7 +103,8 @@ public class RegexUtilities
             Console.Write(dataName + data);
             ConsoleKeyInfo key = Console.ReadKey(true);
 
-            if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+            if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.DownArrow
+                && key.Key != ConsoleKey.LeftArrow && key.Key != ConsoleKey.RightArrow && key.Key != ConsoleKey.UpArrow)
             {
                 data += key.KeyChar;
                 Console.Write(key.KeyChar);
@@ -119,12 +122,13 @@ public class RegexUtilities
                     break;
                 }
             }
-        Console.Clear();
+            Console.Clear();
+            LoadingScreen();
+        
 
 
         }
 
-        dataName += data;
         return data;
 
 
@@ -244,6 +248,162 @@ public class RegexUtilities
 
         }
 
+
+    }
+
+    public static void LoadingScreen()
+    {
+        Console.WriteLine("################################################################################");
+        Console.WriteLine("#        ##        ##        ##        ##        ##  ########        ##  ####  #");
+        Console.WriteLine("#  ########  ####  ##  ####  #####  #####  ########  ###########  ######  ##  ##");
+        Console.WriteLine("#        ##        ##  ####  #####  #####      ####  ###########  ########  ####");
+        Console.WriteLine("#######  ##  ########  ####  #####  #####  ########  ###########  ######  ##  ##");
+        Console.WriteLine("#        ##  ########        #####  #####  ########        ##        ##  ####  #");
+        Console.WriteLine("################################################################################");
+
+        /*
+        //"SPOTFLIX";
+        string c = "#";
+        string e = " ";
+        void Times(int a, string b)
+        {
+            for (int i = 0; i < a; i++)
+            {
+                Console.Write(b);
+                
+            }
+        }
+        
+        
+        //Fila 1
+        Times(80, c);
+        Console.Write("\n");
+
+        //Fila 2
+        Times(1, c);
+        Times(8, e);
+        Times(2, c);
+        Times(8, e);
+        Times(2, c);
+        Times(8, e);
+        Times(2, c);
+        Times(8, e);
+        Times(2, c);
+        Times(8, e);
+        Times(2, c);
+        Times(2, e);
+        Times(8, c);
+        Times(8, e);
+        Times(2, c);
+        Times(2, e);
+        Times(4, c);
+        Times(2, e);
+        Times(1, c);
+            
+        Console.Write("\n");
+        //Fila 3
+        Times(1, c);
+        Times(2, e);
+        Times(8, c);
+        Times(2, e);
+        Times(4, c);
+        Times(2, e);
+        Times(2, c);
+        Times(2, e);
+        Times(4, c);
+        Times(2, e);
+        Times(5, c);
+        Times(2, e);
+        Times(5, c);
+        Times(2, e);
+        Times(8, c);
+        Times(2, e);
+        Times(2, c);
+        Times(9, c);
+        Times(2, e);
+        Times(6, c);
+        Times(2, e);
+        Times(2, c);
+        Times(2, e);
+        Times(2, c);
+            
+        Console.Write("\n");
+        //Fila4
+        Times(1, c);
+        Times(8, e);
+        Times(2, c);
+        Times(8, e);
+        Times(2, c);
+        Times(2, e);
+        Times(4, c);
+        Times(2, e);
+        Times(5, c);
+        Times(2, e);
+        Times(5, c);
+        Times(6, e);
+        Times(4, c);
+        Times(2, e);
+        Times(9, c);
+        Times(2, c);
+        Times(2, e);
+        Times(8, c);
+        Times(2, e);
+        Times(4, c);
+
+        Console.Write("\n");
+
+        //Fila 5
+        Times(7, c);
+        Times(2, e);
+        Times(2, c);
+        Times(2, e);
+        Times(8, c);
+        Times(2, e);
+        Times(4, c);
+        Times(2, e);
+        Times(5, c);
+        Times(2, e);
+        Times(5, c);
+        Times(2, e);
+        Times(8, c);
+        Times(2, e);
+        Times(9, c);
+        Times(2, c);
+        Times(2, e);
+        Times(6, c);
+        Times(2, e);
+        Times(2, c);
+        Times(2, e);
+        Times(2, c);
+
+        Console.Write("\n");
+
+        //Fila 6
+        Times(1, c);
+        Times(8, e);
+        Times(2, c);
+        Times(2, e);
+        Times(8, c);
+        Times(8, e);
+        Times(5, c);
+        Times(2, e);
+        Times(5, c);
+        Times(2, e);
+        Times(8, c);
+        Times(8, e);
+        Times(2, c);
+        Times(8, e);
+        Times(2, c);
+        Times(2, e);
+        Times(4, c);
+        Times(2, e);
+        Times(1, c);
+
+        Console.Write("\n");
+        //Fila 7
+        Times(80, c);
+        Console.Write("\n");
+        */
 
     }
 }

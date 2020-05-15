@@ -53,6 +53,7 @@
     <Compile Include="VideoMetadata.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Admin.cs" />
+    <Compile Include="Metadata.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

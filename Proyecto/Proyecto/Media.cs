@@ -7,7 +7,7 @@ using System.Threading;
 namespace Proyecto
 {
     [Serializable]
-    public class Media
+    public abstract class Media
     {
         protected Dictionary<string, string> Information;
         protected int UsersLike;
@@ -40,6 +40,7 @@ namespace Proyecto
             //Event con play
         }
 
+        public abstract Metadata GetMetadata();
 
         public void TiempoReproduccion()
         {
@@ -153,7 +154,17 @@ namespace Proyecto
 
         public void Play()
         {
-            _ = Process.Start(FileName);
+
+            Process ps = new Process();
+
+            ps.StartInfo.FileName = "mplayer";
+
+            ps.StartInfo.UseShellExecute = false;
+            ps.StartInfo.RedirectStandardInput = true;
+            string args = "-nofs -really-quiet -identify -slave -nomouseinput -sub-fuzziness 1 ";
+            ps.StartInfo.Arguments = args + " \"" + FileName + "\"";
+            ps.Start();
+            
         }
 
         public void AddToQueue()

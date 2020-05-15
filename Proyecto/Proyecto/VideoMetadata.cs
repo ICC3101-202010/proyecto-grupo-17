@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Proyecto
 {
     [Serializable]
-    public class VideoMetadata
+    public class VideoMetadata : Metadata
     {
         private string Name;
         private string Creator;
@@ -23,15 +23,15 @@ namespace Proyecto
             Add();
         }
 
-        public string GetName() { return Name; }
-        public string GetCreator() { return Creator; }
-        public string GetGenre() { return Genre; }
-        public string GetCategory() { return Category; }
-        public string GetStudio() { return Studio; }
+        public override string GetName() { return Name; }
+        public override string GetCreator() { return Creator; }
+        public override string GetGenre() { return Genre; }
+        public override string GetCategory() { return Category; }
+        public override string GetStudio() { return Studio; }
         public int GetPubYear() { return PubYear; }
         public string GetDescription() { return Description; }
-        public List<Person> GetActors() { return Actors; }
-        public Person GetDirector() { return Director; }
+        public override List<Person> GetActors() { return Actors; }
+        public override Person GetDirector() { return Director; }
         public string GetResolution() { return Resolution; }
         public string GetAspectRatio() { return AspectRatio; }
 
@@ -41,7 +41,7 @@ namespace Proyecto
         public void Add()
         {
             List<string> metaMenu = new List<string>() {"Name: ","Creator: ","Genre: ","Category: ", "Actors: ", "Director: ",
-            "Studio", "Release Year: ", "Description: ", "Resolution: ", "Aspect Ratio: ","Done!", "Back"};
+            "Studio: ", "Release Year: ", "Description: ", "Resolution: ", "Aspect Ratio: ","Done!", "Back"};
             string name = "";
             string creator = "";
             string genre = "";
@@ -264,6 +264,7 @@ namespace Proyecto
                         Description = description;
                         Resolution = resolution;
                         AspectRatio = aspectRatio;
+                        return;
                     }
                     Console.Clear();
                 }
@@ -278,7 +279,14 @@ namespace Proyecto
 
         }
 
+        public override Artist GetArtist()
+        {
+            return null;
+        }
 
-
+        public override Album GetAlbum()
+        {
+            return null;
+        }
     }
 }

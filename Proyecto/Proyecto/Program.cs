@@ -20,16 +20,20 @@ namespace Proyecto
         public static void Main(string[] args)
         {
             Console.CursorVisible = false;
+            RegexUtilities.LoadingScreen();
+            Thread.Sleep(3000);
             List<string> start = new List<string>() { "Hello, and welcome to Spotflix!", "Log In" , "Register" ,"Admin Log In", "Exit"};
             List<string> mainMenu = new List<string>() { "Menu", "Search", "Profile", "play", "Log out" };
             List<string> searchMenu = new List<string>() {"Search: ", "Filters", "Go!", "Back" };
-
+            Console.Clear();
             while (true)
             {
+                RegexUtilities.LoadingScreen();
                 string selectedMenuItem = RegexUtilities.GetMenu(start);
                 if (selectedMenuItem == "Log In")
                 {
                     Console.Clear();
+                    RegexUtilities.LoadingScreen();
                     string username = Spotflix.LogIn();
 
                     if (username != "")
@@ -38,6 +42,7 @@ namespace Proyecto
                         while (true)
                         {
                             Console.Clear();
+                            RegexUtilities.LoadingScreen();
                             selectedMenuItem = RegexUtilities.GetMenu(mainMenu);
                             if (selectedMenuItem == "Log out") { username = ""; break; }
 
@@ -46,18 +51,58 @@ namespace Proyecto
                                 while (true)
                                 {
                                     Console.Clear();
+                                    RegexUtilities.LoadingScreen();
                                     selectedMenuItem = RegexUtilities.GetMenu(searchMenu);
-
+                                    string searchKey = "";
                                     if (selectedMenuItem == searchMenu[0])
                                     {
-                                        string searchKey = RegexUtilities.WriteData(searchMenu[0]);
-                                        Filter fil = new Filter();
-                                        List<Media> results = fil.Search(searchKey);
-
+                                        Console.Clear();
+                                        RegexUtilities.LoadingScreen();
+                                        searchMenu[0] = searchMenu[0].Substring(0, 8);
+                                        searchKey = RegexUtilities.WriteData(searchMenu[0]);
+                                        searchMenu[0] += searchKey;
+                                        Console.Clear();
 
                                     }
 
+                                    else if (selectedMenuItem == searchMenu[2])
+                                    {
+                                        Filter fil = new Filter();
+                                        List<Media> results = fil.Search(searchKey);
+                                        if (results.Count > 0)
+                                        {
+                                            List<string> lsSe = new List<string>();
+                                            foreach (Media media in results)
+                                            {
+                                                lsSe.Add(media.GetMetadata().GetName());
+                                            }
+                                            lsSe.Add("Back");
+                                            while (true)
+                                            {
+                                                string selectMedia = RegexUtilities.GetMenu(lsSe);
+                                                if (selectMedia != "" && selectMedia != "Back")
+                                                {
+                                                    int ind = lsSe.IndexOf(selectMedia);
+                                                    Media media = results[ind];
+                                                    if (media.GetType() == typeof(Song))
+                                                    {
+                                                        //display info
+                                                        media.Play();
+                                                    }
+                                                }
+                                                else if (selectMedia == "Back")
+                                                {
+                                                    break;
+                                                }
 
+                                            }
+                                        }
+                                    }
+                                    else if (selectedMenuItem == searchMenu[3])
+                                    {
+                                        Console.Clear();
+                                        break;
+                                    }
                                 }
                             }
 
@@ -85,6 +130,7 @@ namespace Proyecto
                 else if (selectedMenuItem == "Register")
                 {
                     Console.Clear();
+                    RegexUtilities.LoadingScreen();
                     Spotflix.Register();
                     Save(Spotflix.GetUserDB , Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
                 }
@@ -93,6 +139,7 @@ namespace Proyecto
                 {
                     
                     Console.Clear();
+                    RegexUtilities.LoadingScreen();
                     string adm = Spotflix.AdminLogIn();
                     if (adm != "")
                     {
@@ -108,7 +155,13 @@ namespace Proyecto
 
                             if (selectedMenuItem == "Add Media")
                             {
+                                Console.Clear();
+                                RegexUtilities.LoadingScreen();
                                 administrator.AddMedia();
+                                Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
+                                Console.WriteLine("Ready");
+                                Thread.Sleep(1000);
+                                Console.Clear();
                             }
 
                             else if (selectedMenuItem == "Log out")
@@ -121,7 +174,9 @@ namespace Proyecto
                             {
                                 
 
-                            } 
+                            }
+
+                            Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
                         }
 
 
@@ -131,6 +186,7 @@ namespace Proyecto
                     else
                     {
                         Console.Clear();
+                        RegexUtilities.LoadingScreen();
                         Console.WriteLine("You are not an administrator.");
                         break;
                     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Proyecto
 {
@@ -174,20 +175,21 @@ namespace Proyecto
                     Console.Clear();
                     string fName = RegexUtilities.WriteData("File Name(with extension):  ");
                     Console.Clear();
-                    SongMetadata sMeta = new SongMetadata();
-                    // Falta la informacion
-
+                    
                     try
                     {
-                        Song song = new Song(sMeta, fName);
+                        Song song = new Song(fName);
 
-                        sMeta.GetArtist().AddSong(song);
-                        sMeta.GetAlbum().AddSong(song);
-                        Spotflix.AddMedia(song);
+
+                        Spotflix.SaveMedia(song);
+                        Console.WriteLine("Win");
+                        Thread.Sleep(2000);
+                        return;
                     }
                     catch (Exception)
                     {
-
+                        Console.WriteLine("Fail");
+                        Thread.Sleep(2000);
                     }
                 }
 
@@ -196,11 +198,20 @@ namespace Proyecto
                     Console.Clear();
                     string fName = RegexUtilities.WriteData("File Name(with extension):  ");
                     Console.Clear();
-                    // Falta la informacion
 
-                    Video video = new Video(fName);
 
-                    Spotflix.AddMedia(video);
+                    try
+                    {
+                        
+                        Video video = new Video(fName);
+                        Spotflix.SaveMedia(video);
+                        return;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Fail");
+                        Thread.Sleep(2000);
+                    }
 
                     //video.Get
 

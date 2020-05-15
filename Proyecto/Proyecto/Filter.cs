@@ -152,14 +152,14 @@ namespace Proyecto
 
             List<Media> SF = Spotflix.GetMediaDB;
             
-
+            /*
             foreach(Song s in SF)
             {
                 List<string> Options = new List<string>();
-                string o1 = s.GetMetadata.GetName();
-                string o2 = s.GetMetadata.GetArtist().GetName();
-                string o3 = s.GetMetadata.GetAlbum().GetName();
-                string o4 = s.GetMetadata.GetGenre();
+                string o1 = s.GetMetadata().GetName();
+                string o2 = s.GetMetadata().GetArtist().GetName();
+                string o3 = s.GetMetadata().GetAlbum().GetName();
+                string o4 = s.GetMetadata().GetGenre();
 
                 Options.Add(o1);
                 Options.Add(o2);
@@ -177,18 +177,37 @@ namespace Proyecto
                     
                 }
             }
+            */
 
-
-            foreach(Video v in SF)
+            foreach(Media v in SF)
             {
                 List<string> Options2 = new List<string>();
+                string o1, o2, o3, o4, o5, o6, o7, o8;
+                o1 = o2 = o3 = o4 = o5 = o6 = o7 = o8 = "";
 
-                string o1 = v.GetMetadata.GetName();
-                string o2 = v.GetMetadata.GetCreator();
-                string o3 = v.GetMetadata.GetGenre();
-                string o4 = v.GetMetadata.GetCategory();
-                string o5 = v.GetMetadata.GetDirector().GetName();
-                string o6 = v.GetMetadata.GetStudio();
+                try
+                {
+
+                    o1 = v.GetMetadata().GetName().ToLower();
+                }
+                catch { }
+                try
+                {
+                    o2 = v.GetMetadata().GetCreator().ToLower();
+                }
+                catch { }
+                try { o3 = v.GetMetadata().GetGenre().ToLower(); }
+                catch { }
+                try { o4 = v.GetMetadata().GetCategory().ToLower(); }
+                catch { }
+                try { o5 = v.GetMetadata().GetDirector().GetName().ToLower(); }
+                catch { }
+                try { o6 = v.GetMetadata().GetStudio().ToLower(); }
+                catch { }
+                try { o7 = v.GetMetadata().GetArtist().GetName().ToLower(); }
+                catch { }
+                try { o8 = v.GetMetadata().GetAlbum().GetName().ToLower(); }
+                catch { }
 
                 Options2.Add(o1);
                 Options2.Add(o2);
@@ -196,14 +215,29 @@ namespace Proyecto
                 Options2.Add(o4);
                 Options2.Add(o5);
                 Options2.Add(o6);
-
+                Options2.Add(o7);
+                Options2.Add(o8);
+                try
+                {
+                    foreach (Person actor in v.GetMetadata().GetActors())
+                    {
+                        Options2.Add(actor.GetName());
+                    }
+                }
+                catch { }
+                
                 foreach (string i in Options2)
                 {
-                        if (i.Contains(key) == true)
+                    bool asd = i.Contains(key.ToLower());
+                    if (asd == true)
+                    {
+                        if (SearchResults.Contains(v) == false)
                         {
                             SearchResults.Add(v);
-                            
                         }
+                        
+                            
+                    }
                     
                     
                 }

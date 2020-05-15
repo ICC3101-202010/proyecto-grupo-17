@@ -71,7 +71,7 @@ namespace Proyecto
             PeopleDB.Add(person);
         }
 
-        public static void AddMedia(Media media)
+        public static void SaveMedia(Media media)
         {
             MediaDB.Add(media);
         }
@@ -111,6 +111,7 @@ namespace Proyecto
             while (true)
             {
                 Console.Clear();
+                RegexUtilities.LoadingScreen();
                 string selected = RegexUtilities.GetMenu(opt);
                 if (selected == "Back")
                 {
@@ -123,6 +124,7 @@ namespace Proyecto
                 {
                     Console.CursorVisible = true;
                     Console.Clear();
+                    RegexUtilities.LoadingScreen();
                     opt[1] = opt[1].Substring(0, 10);
                     username = RegexUtilities.WriteData(opt[1]);
                     opt[1] += username;
@@ -132,6 +134,7 @@ namespace Proyecto
                 else if (selected == opt[2])
                 {
                     Console.Clear();
+                    RegexUtilities.LoadingScreen();
                     Console.CursorVisible = true;
                     opt[2] = opt[2].Substring(0, 10);
                     Console.Write(opt[2]);
@@ -169,6 +172,7 @@ namespace Proyecto
                     catch (Exception)
                     {
                         Console.Clear();
+                        RegexUtilities.LoadingScreen();
                         Console.WriteLine("Username doesn't exist!");
                         Thread.Sleep(1000);
                         Console.Clear();
@@ -192,6 +196,7 @@ namespace Proyecto
             else
             {
                 Console.Clear();
+                RegexUtilities.LoadingScreen();
                 Console.WriteLine("Sorry, you are not an administrator.");
                 Thread.Sleep(1000);
                 return "";
@@ -238,6 +243,7 @@ namespace Proyecto
                 {
                     registrationForm[0] = registrationForm[0].Substring(0, 10);
                     Console.Clear();
+                    RegexUtilities.LoadingScreen();
                     Console.CursorVisible = true;
                     username = RegexUtilities.WriteData(registrationForm[0]);
                     Console.CursorVisible = false;
@@ -246,6 +252,7 @@ namespace Proyecto
                     {
                         usertaken = true;
                         Console.Clear();
+                        RegexUtilities.LoadingScreen();
                         Console.WriteLine("Username taken, please choose a different one.");
                         Thread.Sleep(1000);
                         Console.Clear();
@@ -256,13 +263,14 @@ namespace Proyecto
                         usertaken = false;
                     }
 
-                    Console.Clear();
-                   
+                    Console.Clear(); RegexUtilities.LoadingScreen();
+
                 }
                 else if(sel == registrationForm[1])
                 {
                     registrationForm[1] = registrationForm[1].Substring(0, 7);
                     Console.Clear();
+                    RegexUtilities.LoadingScreen();
                     Console.CursorVisible = true;
                     email = RegexUtilities.WriteData(registrationForm[1]);
                     foreach (User user in UserDB.Values)
@@ -286,7 +294,7 @@ namespace Proyecto
                     }
                     else
                     {
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                         Console.WriteLine("Invalid email or email already in use!");
                         Thread.Sleep(1000);
                         Console.Clear();
@@ -294,33 +302,33 @@ namespace Proyecto
                     }
 
                     
-                    Console.Clear();
+                    Console.Clear(); RegexUtilities.LoadingScreen();
                 }
 
                 else if (sel == registrationForm[2])
                 {
                     registrationForm[2] = registrationForm[2].Substring(0, 10);
-                    Console.Clear();
+                    Console.Clear(); RegexUtilities.LoadingScreen();
                     Console.CursorVisible = true;
                     Console.Write(registrationForm[2]);
                     password = RegexUtilities.HidePassword();
                     Console.CursorVisible = false;
-                    Console.Clear();
+                    Console.Clear(); RegexUtilities.LoadingScreen();
                     a = "";
                     foreach (char item in password) { a += "•"; }
                     registrationForm[2] = $"Password: {a}";
                 }
                 else if (sel == registrationForm[3] && password == null)
                 {
-                    Console.Clear();
+                    Console.Clear(); RegexUtilities.LoadingScreen();
                     Console.WriteLine("You must enter a password first!");
                     Thread.Sleep(1000);
-                    Console.Clear();
+                    Console.Clear(); RegexUtilities.LoadingScreen();
                 }
                 else if (sel == registrationForm[3] && password != null)
                 {
                     registrationForm[3] = registrationForm[3].Substring(0, 18);
-                    Console.Clear();
+                    Console.Clear(); RegexUtilities.LoadingScreen();
                     Console.CursorVisible = true;
                     Console.Write(registrationForm[3]);
                     password2 = RegexUtilities.HidePassword();
@@ -328,7 +336,7 @@ namespace Proyecto
                     foreach (char item in password2) { b += "•"; }
                     registrationForm[3] = $"Confirm password: {b}";
                     Console.CursorVisible = false;
-                    Console.Clear();
+                    Console.Clear(); RegexUtilities.LoadingScreen();
                 }
 
                 else if (sel == registrationForm[4])
@@ -337,7 +345,7 @@ namespace Proyecto
                     while (true)
                     {
                         
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                         Console.WriteLine("Do you want your account to be private?");
                         pvt = RegexUtilities.GetMenu(yesNo);
                         if (pvt == "Yes")
@@ -366,7 +374,7 @@ namespace Proyecto
                     while (true)
                     {
                         
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                         Console.WriteLine("Do you want to get our premium service for only $3.990/month?"); // Que incluye...?
                         prem = RegexUtilities.GetMenu(yesNo);
                         if (prem == "Yes")
@@ -384,49 +392,49 @@ namespace Proyecto
                             break;
                         }
                     }
-                    Console.Clear();
+                    Console.Clear(); RegexUtilities.LoadingScreen();
                 }
 
                 else if (sel == registrationForm[6])
                 {
                     if (username == null | usertaken == true)
                     {
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                         Console.WriteLine("Username in already taken or empty!");
                         Thread.Sleep(1000);
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                     }
 
                     else if (password != password2 | password == null | password2 == null | password == "" | password2 == "")
                     {
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                         Console.WriteLine("Password doesn't match or empty!");
                         Thread.Sleep(1000);
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                     }
 
                     else if (email == null | emailtaken == true | email == "")
                     {
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                         Console.WriteLine("Please enter a valid email address!");
                         Thread.Sleep(1000);
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                     }
 
                     else if (c == null)
                     {
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                         Console.WriteLine("You have to select if you want your account to be private!");
                         Thread.Sleep(1000);
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                     }
 
                     else if (d == null)
                     {
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                         Console.WriteLine("You have to select if you want a premium account!");
                         Thread.Sleep(1000);
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                     }
                     else
                     {
@@ -436,7 +444,7 @@ namespace Proyecto
                         Console.WriteLine("User created successfully!");
                         Console.WriteLine("Now you can log in with your username and password.");
                         Thread.Sleep(1000);
-                        Console.Clear();
+                        Console.Clear(); RegexUtilities.LoadingScreen();
                         return;
                     }
 

@@ -9,17 +9,16 @@ namespace Proyecto
         
         private SongMetadata MetaData;
 
-        public Song(SongMetadata metadata, string fileName) : base(fileName)
+        public Song(string fileName) : base(fileName)
         {
+            SongMetadata metadata = new SongMetadata();
             MetaData = metadata;
         }
 
-        public SongMetadata GetMetadata
+       
+        public override Metadata GetMetadata()
         {
-            get
-            {
-                return MetaData;
-            }
+            return MetaData;
         }
     }
 }
