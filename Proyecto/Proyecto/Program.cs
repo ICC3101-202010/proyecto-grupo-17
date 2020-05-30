@@ -7,12 +7,18 @@ namespace Proyecto
 {
     class MainClass
     {
-
         public static void Main(string[] args)
         {
-            
+
+            User user1 = new User("jmzegers", "jmzegers@gmail.com", "1234", true, true);
+            User user2 = new User("jpzegers", "jpzegers@gmail.com", "2345", true, false);
+            User user3 = new User("nzegers", "nzegers@gmail.com", "3456", false, true);
+            User user4 = new User("mmzegers", "mmzegers@gmail.com", "5678", false, false);
+
+            Spotflix.AddToUserDB("jmzegers", user1);
+
             Console.WriteLine("Hello, and welcome to Spotflix!");
-            Console.WriteLine("Are you a new user or a returning one? new/returning");
+            Console.WriteLine("Are you a new user or a returning one? new/ret");
             string ans = Console.ReadLine();
 
             if (ans == "new")
@@ -20,15 +26,13 @@ namespace Proyecto
                 Spotflix.Register();
             }
 
-            else if (ans == "returning")
+            else if (ans == "ret")
             {
                 Console.WriteLine("Please write your username and password");
                 Console.WriteLine("Username: ");
                 string userN = Console.ReadLine();
                 Console.WriteLine("Password: ");
                 string passW = Console.ReadLine();
-
-                
 
                 if (Spotflix.GetUserDB.ContainsKey(userN) == true)
                 {
@@ -40,7 +44,6 @@ namespace Proyecto
                         Console.WriteLine("a) Search for music or videos");
                         Console.WriteLine("b) Go to playlists");
                         Console.WriteLine("c) Look for other profiles");
-                        Console.WriteLine("");
                         Console.WriteLine("d) Exit");
 
                         string Ans = Console.ReadLine();
@@ -189,6 +192,18 @@ namespace Proyecto
                             Console.WriteLine("List of people that this account follows: ");
                             Console.WriteLine(u2.GetFollowing());
                             Console.WriteLine(" ");
+
+                            Console.WriteLine("Do you wish to follow this account? y/n");
+                            string a2 = Console.ReadLine();
+
+                            if (a2 == "y")
+                            {
+                                User u = Spotflix.GetUserDB[userN];
+                                List<object> f1 = u.GetFollowing();
+                                f1.Add(u2);
+                                List<User> f2 = u2.GetFollowers();
+                                f2.Add(u);
+                            }
                         }
 
                         else
@@ -212,7 +227,6 @@ namespace Proyecto
                 }
 
             }
-
 
         }
 

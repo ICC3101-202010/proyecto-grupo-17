@@ -14,5 +14,13 @@ namespace Proyecto
             Name = name;
             SongList = songList;
         }
+
+        public string GetName
+        {
+            get
+            {
+                return Name;
+            }
+        }
     }
 }

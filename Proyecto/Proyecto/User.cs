@@ -34,6 +34,7 @@ namespace Proyecto
             Queue = queue;
             Playlists = playlists;
             Premium = premium;
+
         }
 
         public string GetPassword()
@@ -64,6 +65,11 @@ namespace Proyecto
         public List<object> GetFollowing()
         {
             return Following;
+        }
+
+        public List<object> GetUserData()
+        {
+            return UserData;
         }
 
         public void AddToQueue(Media nextMedia)
@@ -137,6 +143,7 @@ namespace Proyecto
         }
 
     }
+
 }
 
 

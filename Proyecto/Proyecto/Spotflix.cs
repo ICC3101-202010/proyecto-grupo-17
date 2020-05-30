@@ -8,15 +8,14 @@ namespace Proyecto
     {
         private static Dictionary<string, User> UserDB = new Dictionary<string, User>();
         private static List<Media> MediaDB = new List<Media>();
-        static List<Song> SongDB = new List<Song>();
-        static List<Video> VideoDB = new List<Video>();
+        private static List<Song> SongDB = new List<Song>();
+        private static List<Video> VideoDB = new List<Video>();
 
-        //static Dictionary<string, List<Media>> mediaDB = new Dictionary<string, List<Media>>()
-        //{
-            //{"Songs", SongDB},
-            //{"Videos", VideoDB}
-        //};
-
+        /*static Dictionary<string, List<Media>> mediaDB = new Dictionary<string, List<Media>>()
+        {
+        {"Songs", SongDB},
+        {"Videos", VideoDB}
+        };*/
 
         public static List<Song> GetSongDB
         {
@@ -54,11 +53,6 @@ namespace Proyecto
 
             MediaDB.Add(media);
         }
-
-
-
-
-
 
         public static void Register()
         {
@@ -205,5 +199,11 @@ namespace Proyecto
             Console.Write("Password: ");
             string password = Console.ReadLine();
         }
+
+        public static void AddToUserDB(string userN, User user1)
+        { 
+            Spotflix.GetUserDB.Add(userN, user1);
+        }
+
     }
 }
