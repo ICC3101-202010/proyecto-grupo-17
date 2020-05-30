@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 namespace Proyecto
 {
+    [Serializable]
     public class Song : Media
     {
-        //Dictionary<string, SongMetadata> Metadata = new Dictionary<string, SongMetadata>();
-        private SongMetadata s1;
+        
+        private SongMetadata MetaData;
 
-        public Song(Dictionary<string, List<string>> Information, SongMetadata metadata) : base(Information)
+        public Song(string fileName) : base(fileName)
         {
-            metadata = s1;
+            SongMetadata metadata = new SongMetadata();
+            MetaData = metadata;
         }
 
-        public SongMetadata GetMetadata
+       
+        public override Metadata GetMetadata()
         {
-            get
-            {
-                return s1;
-            }
+            return MetaData;
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Proyecto
 {
+    [Serializable]
     public class User
     {
         private List<object> UserData;
@@ -18,8 +20,9 @@ namespace Proyecto
         private List<object> Likes;
         private bool Premium;
         private List<Playlist> Playlists;
+        private bool Admin;
 
-        public User(string name, string email, string password, bool privateAccount, bool premium)
+        public User(string name, string email, string password, bool privateAccount, bool premium, bool admin)
         {
             UserName = name;
             Email = email;
@@ -34,12 +37,17 @@ namespace Proyecto
             Queue = queue;
             Playlists = playlists;
             Premium = premium;
-
+            Admin = admin;
         }
 
         public string GetPassword()
         {
             return Password;
+        }
+
+        public bool GetAdmin()
+        {
+            return Admin;
         }
 
         public string GetUsername()
@@ -51,6 +59,18 @@ namespace Proyecto
         {
             return Email;
         }
+
+        public bool GetPrivate()
+        {
+            return PrivateAccount;
+        }
+
+        public bool GetPremium()
+        {
+            return Premium;
+        }
+
+        public void MakeAdmin() { Admin = true; }
 
         public List<Playlist> GetPlaylist()
         {
@@ -133,7 +153,7 @@ namespace Proyecto
                 }
             }
 
-            Playlist a = new Playlist(name, privateList, Spotflix.GetUserDB[UserName]);
+            Playlist a = new Playlist(name, privateList, UserName);
             Playlists.Add(a);
         }
 
@@ -142,11 +162,73 @@ namespace Proyecto
 
         }
 
+
+
+
+        public void AddMedia()
+        {
+            List<string> opts = new List<string>() { "Song", "Video", "Back" };
+            string sel = null;
+            while (true)
+            {
+                Console.Clear();
+                sel = RegexUtilities.GetMenu(opts);
+                if (sel == opts[2]) { return; }
+
+                else if (sel == opts[0])
+                {
+                    Console.Clear();
+                    string fName = RegexUtilities.WriteData("File Name(with extension):  ");
+                    Console.Clear();
+                    
+                    try
+                    {
+                        Song song = new Song(fName);
+
+
+                        Spotflix.SaveMedia(song);
+                        Console.WriteLine("Win");
+                        Thread.Sleep(2000);
+                        return;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Fail");
+                        Thread.Sleep(2000);
+                    }
+                }
+
+                else if (sel == opts[1])
+                {
+                    Console.Clear();
+                    string fName = RegexUtilities.WriteData("File Name(with extension):  ");
+                    Console.Clear();
+
+
+                    try
+                    {
+                        
+                        Video video = new Video(fName);
+                        Spotflix.SaveMedia(video);
+                        return;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Fail");
+                        Thread.Sleep(2000);
+                    }
+
+               
+                }
+
+
+            }
+
+
+
+
+
+        }
     }
 
 }
-
-
-//string a = "sss.mp4";
-//_ = Process.Start(a);
-//private Process a = new Process();

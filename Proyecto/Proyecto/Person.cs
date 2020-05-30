@@ -3,17 +3,43 @@ using System.Collections.Generic;
 
 namespace Proyecto
 {
+    [Serializable]
     public class Person
     {
-        public string Name;
-        public List<string> Professions;
-        public int Age;
+        protected string Name;
+        protected List<string> Professions;
 
-        public Person(string name, List<string> professions, int age)
+
+        public Person(string name)
         {
             Name = name;
+            List<string> professions = new List<string>();
             Professions = professions;
-            Age = age;
+
+        }
+
+        public string GetName()
+        {
+            return Name;
+        }
+
+        public List<string> GetProfessions()
+        {
+            return Professions;
+        }
+
+        public void AddProfession(string prof)
+        {
+            if (Professions.Contains(prof))
+            {
+                return;
+            }
+            else
+            {
+                Professions.Add(prof);
+            }
+
+            
         }
     }
 }

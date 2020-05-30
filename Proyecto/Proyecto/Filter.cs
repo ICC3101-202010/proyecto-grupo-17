@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace Proyecto
 {
+    [Serializable]
     public class Filter
     {
         public Filter()
         {
         }
-
+        /*
         public List<object> FilteredSearch(List<int> filters, string a)
         {
             List<object> FilteredRes = new List<object>();
@@ -132,23 +133,27 @@ namespace Proyecto
 
 
 
-
-        public List<object> Search(string a)
+            */
+        public List<Media> Search(string key)
         {
-            List<object> SearchResults = new List<object>();
-            int number = 0;
+            List<Media> SearchResults = new List<Media>();
 
-            List<Song> SFSongs = Spotflix.GetSongDB;
-            List<Song> SongResults = new List<Song>();
-
-            foreach(Song s in SFSongs)
+            List<Media> SF = Spotflix.GetMediaDB;
+            
+            /*
+            foreach(Song s in SF)
             {
-                bool proof = false;
                 List<string> Options = new List<string>();
+
                 string o1 = s.GetMetadata.Name;
                 string o2 = s.GetMetadata.Artist1.Name;
                 string o3 = s.GetMetadata.Album.GetName;
                 string o4 = s.GetMetadata.Genre;
+
+                string o1 = s.GetMetadata().GetName();
+                string o2 = s.GetMetadata().GetArtist().GetName();
+                string o3 = s.GetMetadata().GetAlbum().GetName();
+                string o4 = s.GetMetadata().GetGenre();
 
                 Options.Add(o1);
                 Options.Add(o2);
@@ -157,35 +162,46 @@ namespace Proyecto
 
                 foreach (string i in Options)
                 {
-                    if (proof == false)
+                   
+                    if (i.Contains(key) == true)
                     {
-                        if (i == a)
-                        {
-                            SongResults.Add(s);
-                            proof = true;
-                            number = 1;
-                        }
+                        SearchResults.Add(s);
+                       
                     }
+                    
                 }
             }
+            */
 
-            SearchResults.Add(SongResults);
-
-
-            List<Video> SFVideos = Spotflix.GetVideoDB;
-            List<Video> VidResults = new List<Video>();
-
-            foreach(Video v in SFVideos)
+            foreach(Media v in SF)
             {
-                bool proof = false;
                 List<string> Options2 = new List<string>();
+                string o1, o2, o3, o4, o5, o6, o7, o8;
+                o1 = o2 = o3 = o4 = o5 = o6 = o7 = o8 = "";
 
-                string o1 = v.GetMetadata.Name;
-                string o2 = v.GetMetadata.Creator;
-                string o3 = v.GetMetadata.Genre;
-                string o4 = v.GetMetadata.Category;
-                string o5 = v.GetMetadata.Director.Name;
-                string o6 = v.GetMetadata.Studio;
+                try
+                {
+
+                    o1 = v.GetMetadata().GetName().ToLower();
+                }
+                catch { }
+                try
+                {
+                    o2 = v.GetMetadata().GetCreator().ToLower();
+                }
+                catch { }
+                try { o3 = v.GetMetadata().GetGenre().ToLower(); }
+                catch { }
+                try { o4 = v.GetMetadata().GetCategory().ToLower(); }
+                catch { }
+                try { o5 = v.GetMetadata().GetDirector().GetName().ToLower(); }
+                catch { }
+                try { o6 = v.GetMetadata().GetStudio().ToLower(); }
+                catch { }
+                try { o7 = v.GetMetadata().GetArtist().GetName().ToLower(); }
+                catch { }
+                try { o8 = v.GetMetadata().GetAlbum().GetName().ToLower(); }
+                catch { }
 
                 Options2.Add(o1);
                 Options2.Add(o2);
@@ -193,32 +209,46 @@ namespace Proyecto
                 Options2.Add(o4);
                 Options2.Add(o5);
                 Options2.Add(o6);
-
+                Options2.Add(o7);
+                Options2.Add(o8);
+                try
+                {
+                    foreach (Person actor in v.GetMetadata().GetActors())
+                    {
+                        Options2.Add(actor.GetName());
+                    }
+                }
+                catch { }
+                
                 foreach (string i in Options2)
                 {
-                    if (proof == false)
+                    bool asd = i.Contains(key.ToLower());
+                    if (asd == true)
                     {
-                        if (i == a)
+                        if (SearchResults.Contains(v) == false)
                         {
-                            VidResults.Add(v);
-                            proof = true;
+                            SearchResults.Add(v);
                         }
+                        
+                            
                     }
+                    
                     
                 }
 
             }
-
-            SearchResults.Add(VidResults);
-
-            if (number == 0)
+            if (SearchResults.Count == 0)
             {
                 Console.WriteLine("Your search has returned no results");
+                return SearchResults;
             }
-
-            return SearchResults;
+            else
+            {
+                return SearchResults;
+            }
+            
         }
-
+        
     }
 
 }

@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using System.Threading;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Media;
+
+
 
 namespace Proyecto
 {
@@ -19,6 +26,204 @@ namespace Proyecto
 
             Console.WriteLine("Hello, and welcome to Spotflix!");
             Console.WriteLine("Are you a new user or a returning one? new/ret");
+        
+        static string fileName = "Spotflix.bin";
+
+        public static void Main(string[] args)
+        {
+            Console.CursorVisible = false;
+            RegexUtilities.LoadingScreen();
+            Thread.Sleep(3000);
+            List<string> start = new List<string>() { "Hello, and welcome to Spotflix!", "Log In" , "Register" ,"Admin Log In", "Exit"};
+            List<string> mainMenu = new List<string>() { "Menu", "Search", "Profile", "play", "Log out" };
+            List<string> searchMenu = new List<string>() {"Search: ", "Filters", "Go!", "Back" };
+            Console.Clear();
+            while (true)
+            {
+                RegexUtilities.LoadingScreen();
+                string selectedMenuItem = RegexUtilities.GetMenu(start);
+                if (selectedMenuItem == "Log In")
+                {
+                    Console.Clear();
+                    RegexUtilities.LoadingScreen();
+                    string username = Spotflix.LogIn();
+
+                    if (username != "")
+                    {
+                        User activeUser = Spotflix.GetUserDB[username];
+                        while (true)
+                        {
+                            Console.Clear();
+                            RegexUtilities.LoadingScreen();
+                            selectedMenuItem = RegexUtilities.GetMenu(mainMenu);
+                            if (selectedMenuItem == "Log out") { username = ""; break; }
+
+                            else if (selectedMenuItem == "Search")
+                            {
+                                while (true)
+                                {
+                                    Console.Clear();
+                                    RegexUtilities.LoadingScreen();
+                                    selectedMenuItem = RegexUtilities.GetMenu(searchMenu);
+                                    string searchKey = "";
+                                    if (selectedMenuItem == searchMenu[0])
+                                    {
+                                        Console.Clear();
+                                        RegexUtilities.LoadingScreen();
+                                        searchMenu[0] = searchMenu[0].Substring(0, 8);
+                                        searchKey = RegexUtilities.WriteData(searchMenu[0]);
+                                        searchMenu[0] += searchKey;
+                                        Console.Clear();
+
+                                    }
+
+                                    else if (selectedMenuItem == searchMenu[2])
+                                    {
+                                        Filter fil = new Filter();
+                                        List<Media> results = fil.Search(searchKey);
+                                        if (results.Count > 0)
+                                        {
+                                            List<string> lsSe = new List<string>();
+                                            foreach (Media media in results)
+                                            {
+                                                lsSe.Add(media.GetMetadata().GetName());
+                                            }
+                                            lsSe.Add("Back");
+                                            while (true)
+                                            {
+                                                string selectMedia = RegexUtilities.GetMenu(lsSe);
+                                                if (selectMedia != "" && selectMedia != "Back")
+                                                {
+                                                    int ind = lsSe.IndexOf(selectMedia);
+                                                    Media media = results[ind];
+                                                    if (media.GetType() == typeof(Song))
+                                                    {
+                                                        //display info
+                                                        media.Play();
+                                                    }
+                                                }
+                                                else if (selectMedia == "Back")
+                                                {
+                                                    break;
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                    else if (selectedMenuItem == searchMenu[3])
+                                    {
+                                        Console.Clear();
+                                        break;
+                                    }
+                                }
+                            }
+
+                            else if (selectedMenuItem == "play")
+                            {
+
+
+                                //SoundPlayer player = new SoundPlayer();
+                                //player.SoundLocation = "CSI.wav";
+                                //player.Play();
+                                //Player player = new Player();
+                                //player.Open("CSI.wav");
+                                //Thread.Sleep(30000);
+                                //player.End();
+                                
+
+
+                            }
+                        }
+                    }
+                    
+                   
+                }
+
+                else if (selectedMenuItem == "Register")
+                {
+                    Console.Clear();
+                    RegexUtilities.LoadingScreen();
+                    Spotflix.Register();
+                    Save(Spotflix.GetUserDB , Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
+                }
+
+                else if (selectedMenuItem == "Admin Log In")
+                {
+                    
+                    Console.Clear();
+                    RegexUtilities.LoadingScreen();
+                    string adm = Spotflix.AdminLogIn();
+                    if (adm != "")
+                    {
+                        User administrator = Spotflix.GetUserDB[adm];
+
+
+
+                        List<string> admMenu = new List<string>() { "Add Media", "a", "b", "c", "Log out" };
+                        while (true)
+                        {
+                            Console.Clear();
+                            selectedMenuItem = RegexUtilities.GetMenu(admMenu);
+
+                            if (selectedMenuItem == "Add Media")
+                            {
+                                Console.Clear();
+                                RegexUtilities.LoadingScreen();
+                                administrator.AddMedia();
+                                Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
+                                Console.WriteLine("Ready");
+                                Thread.Sleep(1000);
+                                Console.Clear();
+                            }
+
+                            else if (selectedMenuItem == "Log out")
+                            {
+                                adm = "";
+                                break;
+                            }
+
+                            else if (selectedMenuItem == "a")
+                            {
+                                
+
+                            }
+
+                            Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
+                        }
+
+
+
+                    }
+
+                    else
+                    {
+                        Console.Clear();
+                        RegexUtilities.LoadingScreen();
+                        Console.WriteLine("You are not an administrator.");
+                        break;
+                    }
+                        
+                    
+                Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
+                }
+
+
+
+                else if (selectedMenuItem == "Exit")
+                {
+                    Save(Spotflix.GetUserDB, Spotflix.GetMediaDB, Spotflix.GetPeopleDB, fileName);
+                    Environment.Exit(0);
+                }
+                
+
+                
+                Console.Clear();
+            }
+
+
+            /*
+
+>>>>>>> 87464d8ba8b25ad0819d657c3d3465178a645a7d
             string ans = Console.ReadLine();
 
             if (ans == "new")
@@ -228,13 +433,34 @@ namespace Proyecto
 
             }
 
+<<<<<<< HEAD
+=======
+    */
+>>>>>>> 87464d8ba8b25ad0819d657c3d3465178a645a7d
         }
 
+        public static void Save(Dictionary<string, User> userDB, List<Media> mediaDB, List<Person> peopleDB ,string name)
+        {
+            Stream stream = new FileStream(name, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            IFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, userDB);
+            formatter.Serialize(stream, mediaDB);
+            formatter.Serialize(stream, peopleDB);
+            stream.Close();
+        }
 
+        public static (Dictionary<string, User> ,List<Media>, List<Person>) Load(string name)
+        {
+            Stream stream = new FileStream(name, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            IFormatter formatter = new BinaryFormatter();
+            Dictionary<string, User> userDB = (Dictionary<string, User>)formatter.Deserialize(stream);
+            List<Media> mediaDB = (List<Media>)formatter.Deserialize(stream);
+            List<Person> peopleDB = (List<Person>)formatter.Deserialize(stream);
+            stream.Close();
+
+            return (userDB, mediaDB, peopleDB);
+        }
     }
 
 
 }
-//string a = "sss.mp4";
-//_ = Process.Start(a);
-//private Process a = new Process();

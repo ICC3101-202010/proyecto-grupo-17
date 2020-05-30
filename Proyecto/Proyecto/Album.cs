@@ -3,16 +3,28 @@ using System.Collections.Generic;
 
 namespace Proyecto
 {
+    [Serializable]
     public class Album
     {
         private string Name;
         private List<Song> SongList;
+        private string CoverPhoto;
+
         
 
-        public Album(string name, List<Song> songList)
+        public Album(string name)
         {
             Name = name;
-            SongList = songList;
+        }
+
+        public void AddSong(Song song)
+        {
+            SongList.Add(song); //Event?
+        }
+
+        public string GetName()
+        {
+            return Name;
         }
 
         public string GetName
