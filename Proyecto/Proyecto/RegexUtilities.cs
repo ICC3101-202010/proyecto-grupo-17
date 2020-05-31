@@ -33,10 +33,12 @@ public class RegexUtilities
         }
         catch (RegexMatchTimeoutException)
         {
+            Console.WriteLine(e.Message);
             return false;
         }
         catch (ArgumentException)
         {
+            Console.WriteLine(e.Message);
             return false;
         }
 

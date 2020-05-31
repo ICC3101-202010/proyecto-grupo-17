@@ -14,7 +14,6 @@ namespace Proyecto
         {
             List<object> FilteredRes = new List<object>();
 
-
             List<Song> SFSongs = Spotflix.GetSongDB;
             List<Song> SongResults = new List<Song>();
 
@@ -38,7 +37,7 @@ namespace Proyecto
 
                 if (filters.Contains(3) == true)
                 {
-                    string o3 = s.GetMetadata.Album;
+                    string o3 = s.GetMetadata.Album.GetName;
                     Options.Add(o3);
                 }
 
@@ -47,17 +46,6 @@ namespace Proyecto
                     string o4 = s.GetMetadata.Genre;
                     Options.Add(o4);
                 }
-
-                string o1 = s.GetMetadata.Name;
-                string o2 = s.GetMetadata.Artist1.Name;
-                string o3 = s.GetMetadata.Album;
-                string o4 = s.GetMetadata.Gender;
-
-                Options.Add(o1);
-                Options.Add(o2);
-                Options.Add(o3);
-                Options.Add(o4);
-
 
                 foreach (string i in Options)
                 {
@@ -156,6 +144,12 @@ namespace Proyecto
             foreach(Song s in SF)
             {
                 List<string> Options = new List<string>();
+
+                string o1 = s.GetMetadata.Name;
+                string o2 = s.GetMetadata.Artist1.Name;
+                string o3 = s.GetMetadata.Album.GetName;
+                string o4 = s.GetMetadata.Genre;
+
                 string o1 = s.GetMetadata().GetName();
                 string o2 = s.GetMetadata().GetArtist().GetName();
                 string o3 = s.GetMetadata().GetAlbum().GetName();

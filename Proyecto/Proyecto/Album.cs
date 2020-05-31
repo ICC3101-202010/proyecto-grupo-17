@@ -26,5 +26,13 @@ namespace Proyecto
         {
             return Name;
         }
+
+        public string GetName
+        {
+            get
+            {
+                return Name;
+            }
+        }
     }
 }

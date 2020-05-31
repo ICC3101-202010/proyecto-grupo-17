@@ -87,6 +87,11 @@ namespace Proyecto
             return Following;
         }
 
+        public List<object> GetUserData()
+        {
+            return UserData;
+        }
+
         public void AddToQueue(Media nextMedia)
         {
             Queue.Enqueue(nextMedia);
@@ -213,13 +218,7 @@ namespace Proyecto
                         Thread.Sleep(2000);
                     }
 
-                    //video.Get
-
-                    /*sMeta.GetDirector().AddVideo(video);
-                    foreach (Person ppl in sMeta.GetActors())
-                    {
-                        ppl.AddVideo(video);
-                    }*/
+               
                 }
 
 
@@ -231,9 +230,5 @@ namespace Proyecto
 
         }
     }
+
 }
-
-
-//string a = "sss.mp4";
-//_ = Process.Start(a);
-//private Process a = new Process();

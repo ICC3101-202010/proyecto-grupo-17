@@ -7,11 +7,17 @@ namespace Proyecto
     [Serializable]
     public static class Spotflix
     {
-        private static Dictionary<string, User> UserDB;
-        private static List<Media> MediaDB;
+        private static Dictionary<string, User> UserDB = new Dictionary<string, User>();
+        private static List<Media> MediaDB = new List<Media>();
+        private static List<Song> SongDB = new List<Song>();
+        private static List<Video> VideoDB = new List<Video>();
+
+        /*static Dictionary<string, List<Media>> mediaDB = new Dictionary<string, List<Media>>()
+        {
+        {"Songs", SongDB},
+        {"Videos", VideoDB}
+        };*/
         private static List<Person> PeopleDB;
-        static List<Song> SongDB = new List<Song>();
-        static List<Video> VideoDB = new List<Video>();
 
         //static Dictionary<string, List<Media>> mediaDB = new Dictionary<string, List<Media>>()
         //{
@@ -483,6 +489,10 @@ namespace Proyecto
 
         }
 
+        public static void AddToUserDB(string userN, User user1)
+        { 
+            Spotflix.GetUserDB.Add(userN, user1);
+        }
 
 
     }
